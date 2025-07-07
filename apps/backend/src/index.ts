@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
@@ -78,6 +78,35 @@ app.get('/api/platforms', async (req, res) => {
     res.json(platforms);
   } catch (err) {
     res.status(500).json({ error: 'Error al obtener plataformas', details: err });
+  }
+});
+
+// Extiende el tipo Request para incluir user
+interface AuthRequest extends Request {
+  user?: any;
+}
+
+// Middleware para verificar JWT tipado
+function authenticateToken(req: AuthRequest, res: Response, next: NextFunction) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (!token) return res.status(401).json({ error: 'Token requerido' });
+  const jwt = require('jsonwebtoken');
+  jwt.verify(token, process.env.JWT_SECRET || 'clubplusdev', (err: any, user: any) => {
+    if (err) return res.status(403).json({ error: 'Token inválido' });
+    req.user = user;
+    next();
+  });
+}
+
+// Ejemplo de endpoint protegido
+app.get('/api/me', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
+    if (!user) return res.status(404).json({ error: 'Usuario no encontrado' });
+    res.json({ id: user.id, email: user.email, name: user.name, phone: user.phone });
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener usuario', details: err });
   }
 });
 
