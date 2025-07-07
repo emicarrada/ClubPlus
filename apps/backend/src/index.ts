@@ -55,8 +55,17 @@ app.post('/api/login', async (req, res) => {
     if (!valid) {
       return res.status(401).json({ error: 'Credenciales inválidas' });
     }
-    // Aquí deberías generar y devolver un JWT (pendiente de implementar)
-    res.json({ id: user.id, email: user.email, name: user.name, phone: user.phone });
+    // Generar JWT
+    const jwt = await import('jsonwebtoken');
+    const token = jwt.sign(
+      { id: user.id, email: user.email, name: user.name },
+      process.env.JWT_SECRET || 'clubplusdev',
+      { expiresIn: '7d' }
+    );
+    res.json({
+      token,
+      user: { id: user.id, email: user.email, name: user.name, phone: user.phone }
+    });
   } catch (err) {
     res.status(500).json({ error: 'Error al iniciar sesión', details: err });
   }
