@@ -110,6 +110,128 @@ app.get('/api/me', authenticateToken, async (req: AuthRequest, res: Response) =>
   }
 });
 
+// Utilidad para calcular el precio final de un combo
+const MARGEN = 1.55;
+
+async function calcularPrecioFinal(platformIds: string[]): Promise<number> {
+  const platforms = await prisma.platform.findMany({ where: { id: { in: platformIds } } });
+  const suma = platforms.reduce((acc, p) => acc + p.pricePerProfile, 0);
+  return Math.round(suma * MARGEN);
+}
+
+// Crear combo personalizado
+app.post('/api/combo', authenticateToken, async (req: AuthRequest, res: Response) => {
+  const { platformIds } = req.body;
+  if (!Array.isArray(platformIds) || platformIds.length < 2 || platformIds.length > 5) {
+    return res.status(400).json({ error: 'Debes seleccionar entre 2 y 5 plataformas.' });
+  }
+  if (new Set(platformIds).size !== platformIds.length) {
+    return res.status(400).json({ error: 'No puedes repetir plataformas.' });
+  }
+  try {
+    // Verifica que el usuario no tenga un combo activo
+    const existing = await prisma.combo.findFirst({ where: { userId: req.user.id, status: 'ACTIVE' } });
+    if (existing) {
+      return res.status(409).json({ error: 'Ya tienes un combo activo. Modifícalo en su lugar.' });
+    }
+    // Calcula el precio final
+    const priceFinal = await calcularPrecioFinal(platformIds);
+    // Crea el combo y las relaciones
+    const combo = await prisma.combo.create({
+      data: {
+        userId: req.user.id,
+        priceFinal,
+        comboPlatforms: {
+          create: platformIds.map(pid => ({ platformId: pid }))
+        }
+      },
+      include: {
+        comboPlatforms: { include: { platform: true } }
+      }
+    });
+    res.status(201).json({
+      id: combo.id,
+      userId: combo.userId,
+      platforms: combo.comboPlatforms.map(cp => ({
+        id: cp.platform.id,
+        name: cp.platform.name,
+        pricePerProfile: cp.platform.pricePerProfile
+      })),
+      priceFinal: combo.priceFinal,
+      status: combo.status,
+      createdAt: combo.createdAt
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Error al crear combo', details: err });
+  }
+});
+
+// Ver combo activo
+app.get('/api/combo', authenticateToken, async (req: AuthRequest, res: Response) => {
+  try {
+    const combo = await prisma.combo.findFirst({
+      where: { userId: req.user.id, status: 'ACTIVE' },
+      include: { comboPlatforms: { include: { platform: true } } }
+    });
+    if (!combo) return res.status(404).json({ error: 'No tienes combo activo.' });
+    res.json({
+      id: combo.id,
+      userId: combo.userId,
+      platforms: combo.comboPlatforms.map(cp => ({
+        id: cp.platform.id,
+        name: cp.platform.name,
+        pricePerProfile: cp.platform.pricePerProfile
+      })),
+      priceFinal: combo.priceFinal,
+      status: combo.status,
+      createdAt: combo.createdAt
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener combo', details: err });
+  }
+});
+
+// Modificar combo activo
+app.put('/api/combo', authenticateToken, async (req: AuthRequest, res: Response) => {
+  const { platformIds } = req.body;
+  if (!Array.isArray(platformIds) || platformIds.length < 2 || platformIds.length > 5) {
+    return res.status(400).json({ error: 'Debes seleccionar entre 2 y 5 plataformas.' });
+  }
+  if (new Set(platformIds).size !== platformIds.length) {
+    return res.status(400).json({ error: 'No puedes repetir plataformas.' });
+  }
+  try {
+    const combo = await prisma.combo.findFirst({ where: { userId: req.user.id, status: 'ACTIVE' }, include: { comboPlatforms: true } });
+    if (!combo) return res.status(404).json({ error: 'No tienes combo activo.' });
+    // Actualiza plataformas y precio
+    const priceFinal = await calcularPrecioFinal(platformIds);
+    // Borra relaciones previas
+    await prisma.comboPlatform.deleteMany({ where: { comboId: combo.id } });
+    // Crea nuevas relaciones
+    await prisma.comboPlatform.createMany({ data: platformIds.map(pid => ({ comboId: combo.id, platformId: pid })) });
+    // Actualiza el combo
+    const updated = await prisma.combo.update({
+      where: { id: combo.id },
+      data: { priceFinal },
+      include: { comboPlatforms: { include: { platform: true } } }
+    });
+    res.json({
+      id: updated.id,
+      userId: updated.userId,
+      platforms: updated.comboPlatforms.map(cp => ({
+        id: cp.platform.id,
+        name: cp.platform.name,
+        pricePerProfile: cp.platform.pricePerProfile
+      })),
+      priceFinal: updated.priceFinal,
+      status: updated.status,
+      createdAt: updated.createdAt
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Error al modificar combo', details: err });
+  }
+});
+
 // Aquí irán los endpoints del MVP (usuarios, combos, pagos, etc.)
 
 const PORT = process.env.PORT || 3001;
