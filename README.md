@@ -41,8 +41,11 @@ Club+ es una plataforma web que permite a usuarios en México acceder a combos p
 - [x] Tipado seguro en TypeScript
 
 ### 6. Gestión de Combos y Selección de Plataformas
-- [ ] Endpoints para crear combos personalizados
-- [ ] Validación de reglas de negocio (mínimo 2 plataformas)
+- [x] Modelo de combos actualizado en Prisma
+- [x] Migración aplicada y cliente Prisma actualizado
+- [x] Endpoints para crear, ver y modificar combo personalizado (`/api/combo`)
+- [x] Validación de reglas de negocio (mínimo 2, máximo 5 plataformas, sin repetidas)
+- [x] Cálculo automático de precio final con margen
 
 ### 7. Pagos y Suscripciones
 - [ ] Integración con Stripe/MercadoPago
@@ -69,9 +72,9 @@ Club+ es una plataforma web que permite a usuarios en México acceder a combos p
 ---
 
 ## ¿Qué sigue?
-- Implementar endpoints para combos y selección de plataformas.
 - Integrar pagos y automatizaciones.
 - Desarrollar dashboard y panel de administración.
+- Implementar lógica de asignación automática de perfiles y notificaciones.
 
 ---
 
