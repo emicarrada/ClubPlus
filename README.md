@@ -1,6 +1,6 @@
 # Club+
 
-Club+ es una plataforma web que permite a usuarios en México acceder a combos personalizados de plataformas digitales (Netflix, Disney+, Spotify, etc.) a precios accesibles. Los usuarios seleccionan dos o más plataformas, pagan mensualmente y reciben perfiles individuales dentro de cuentas administradas por Club+. Todo el proceso es 100% automatizado, desde la compra hasta la asignación de perfiles y renovaciones.
+Club+es una plataforma web que permite a usuarios en México acceder a combos personalizados de plataformas digitales (Netflix, Disney+, Spotify, etc.) a precios accesibles. Los usuarios seleccionan dos o más plataformas, pagan mensualmente y reciben perfiles individuales dentro de cuentas administradas por Club+. Todo el proceso es 100% automatizado, desde la compra hasta la asignación de perfiles y renovaciones.
 
 ## Arquitectura General
 
