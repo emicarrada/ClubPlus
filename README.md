@@ -6,7 +6,6 @@ Club+es una plataforma web que permite a usuarios en México acceder a combos pe
 
 - **Monorepo**: apps/backend (Node.js + Express), apps/frontend (React + Tailwind), packages/prisma (Prisma ORM), automation (n8n workflows)
 
-
 ## Estado Actual del Proyecto
 
 **Estado actual del proyecto (15 de julio de 2025)**
@@ -14,7 +13,7 @@ Club+es una plataforma web que permite a usuarios en México acceder a combos pe
 - El backend está iniciado, con estructura en `apps/backend` y archivo principal `src/index.ts`.
 - Hay un esquema de base de datos en `packages/prisma/schema.prisma` y migraciones previas.
 - El frontend tiene carpeta, pero no se observa estructura ni documentación inicial.
-- Existe la carpeta `docs/`, pero solo contiene `frontend_structure.md` (no hay documentos de endpoints, modelos, ni flujos).
+- Existe la carpeta `docs/`, actualmente con `docs/backend_endpoints.md`, `docs/db_review.md` y `docs/frontend_structure.md`. Los cuales explican los endpoints del backend, la revisión de la base de datos y la estructura del frontend respectivamente.
 - No se visualizan pruebas unitarias ni documentación de despliegue.
 
 ---
@@ -26,15 +25,18 @@ Club+es una plataforma web que permite a usuarios en México acceder a combos pe
 #### Semana 1: 16–20 julio
 
 **Backend**
+
 - Documentar endpoints existentes (`docs/backend_endpoints.md`).
 - Revisar y documentar modelos de base de datos (`docs/db_review.md`).
 
 **Frontend**
+
 - Configurar entorno de desarrollo frontend.
 - Crear estructura base del proyecto en frontend.
 - Documentar estructura inicial (`docs/frontend_structure.md`).
 
 **Entregables:**
+
 - docs/backend_endpoints.md
 - docs/db_review.md
 - docs/frontend_structure.md
@@ -43,16 +45,19 @@ Club+es una plataforma web que permite a usuarios en México acceder a combos pe
 #### Semana 2: 21–27 julio
 
 **Backend**
+
 - Implementar endpoints de registro y login de usuario.
 - Pruebas unitarias de autenticación.
 - Documentar endpoints y pruebas.
 
 **Frontend**
+
 - Crear pantallas de registro y login.
 - Integrar llamadas a los endpoints de autenticación.
 - Documentar flujo de autenticación (`docs/auth_flow.md`).
 
 **Entregables:**
+
 - Endpoints y pruebas de autenticación
 - Pantallas de registro/login funcionales
 - docs/auth_flow.md
@@ -60,15 +65,18 @@ Club+es una plataforma web que permite a usuarios en México acceder a combos pe
 #### Semana 3: 28 julio–3 agosto
 
 **Backend**
+
 - Implementar CRUD de combos.
 - Migraciones y documentación (`docs/migration_log.md`).
 
 **Frontend**
+
 - Crear pantallas para gestión de combos (listar, crear, editar, eliminar).
 - Integrar llamadas a endpoints de combos.
 - Documentar uso de combos en frontend (`docs/combos_frontend.md`).
 
 **Entregables:**
+
 - Endpoints y migraciones de combos
 - Pantallas de combos funcionales
 - docs/combos_frontend.md
@@ -77,15 +85,18 @@ Club+es una plataforma web que permite a usuarios en México acceder a combos pe
 #### Semana 4: 4–10 agosto
 
 **Backend**
+
 - Implementar CRUD de socios.
 - Pruebas unitarias y documentación.
 
 **Frontend**
+
 - Crear pantallas para gestión de socios (listar, crear, editar, eliminar).
 - Integrar llamadas a endpoints de socios.
 - Documentar uso de socios en frontend (`docs/socios_frontend.md`).
 
 **Entregables:**
+
 - Endpoints y pruebas de socios
 - Pantallas de socios funcionales
 - docs/socios_frontend.md
@@ -93,14 +104,17 @@ Club+es una plataforma web que permite a usuarios en México acceder a combos pe
 #### Semana 5: 11–17 agosto
 
 **Backend**
+
 - Mejorar seguridad y validaciones globales.
 - Documentar seguridad (`docs/security.md`).
 
 **Frontend**
+
 - Mejorar validaciones en formularios y manejo de errores.
 - Documentar validaciones frontend (`docs/frontend_validations.md`).
 
 **Entregables:**
+
 - Código backend con seguridad mejorada
 - docs/security.md
 - Formularios frontend con validaciones
@@ -109,15 +123,18 @@ Club+es una plataforma web que permite a usuarios en México acceder a combos pe
 #### Semana 6: 18–24 agosto
 
 **Backend**
+
 - Refactorizar código y ejecutar pruebas integrales.
 - Documentar despliegue (`docs/deployment.md`).
 
 **Frontend**
+
 - Refactorizar componentes y estilos.
 - Pruebas integrales de flujo completo.
 - Documentar despliegue frontend (`docs/frontend_deployment.md`).
 
 **Entregables:**
+
 - Backend refactorizado y probado
 - docs/deployment.md
 - Frontend refactorizado y probado
