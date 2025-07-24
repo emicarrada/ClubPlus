@@ -1,4 +1,5 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { PrismaClient } from '@prisma/client';
@@ -11,12 +12,12 @@ const prisma = new PrismaClient();
 app.use(cors());
 app.use(express.json());
 
-app.get('/health', (req, res) => {
+app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', date: new Date() });
 });
 
 // Endpoint para registrar usuario
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', async (req: Request, res: Response) => {
   const { email, password, name, phone } = req.body;
   if (!email || !password || !name) {
     return res.status(400).json({ error: 'Faltan campos obligatorios' });
@@ -40,7 +41,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 // Endpoint para login de usuario
-app.post('/api/login', async (req, res) => {
+app.post('/api/login', async (req: Request, res: Response) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ error: 'Faltan campos obligatorios' });
@@ -72,7 +73,7 @@ app.post('/api/login', async (req, res) => {
 });
 
 // Endpoint para consultar plataformas disponibles
-app.get('/api/platforms', async (req, res) => {
+app.get('/api/platforms', async (req: Request, res: Response) => {
   try {
     const platforms = await prisma.platform.findMany();
     res.json(platforms);
@@ -81,9 +82,11 @@ app.get('/api/platforms', async (req, res) => {
   }
 });
 
-// Extiende el tipo Request para incluir user
+// Extiende el tipo Request para incluir user y body correctamente
 interface AuthRequest extends Request {
   user?: any;
+  body: any;
+  headers: any;
 }
 
 // Middleware para verificar JWT tipado
@@ -110,23 +113,49 @@ app.get('/api/me', authenticateToken, async (req: AuthRequest, res: Response) =>
   }
 });
 
-// Utilidad para calcular el precio final de un combo
-const MARGEN = 1.55;
 
-async function calcularPrecioFinal(platformIds: string[]): Promise<number> {
-  const platforms = await prisma.platform.findMany({ where: { id: { in: platformIds } } });
-  const suma = platforms.reduce((acc, p) => acc + p.pricePerProfile, 0);
-  return Math.round(suma * MARGEN);
+// Definición de combos fijos para el MVP
+const COMBOS = [
+  {
+    name: 'FULL STREAM',
+    platforms: [
+      { name: 'Netflix Premium' },
+      { name: 'Disney+' },
+      { name: 'Max (HBO)' },
+      { name: 'Amazon Prime Video' }
+    ]
+  },
+  {
+    name: 'OUT OF THE BOX',
+    platforms: [
+      { name: 'Canva Pro' },
+      { name: 'Spotify Premium Familiar' },
+      { name: 'YouTube Premium Familiar' }
+    ]
+  },
+  {
+    name: 'ALL IN',
+    platforms: [
+      { name: 'Netflix' },
+      { name: 'Max' },
+      { name: 'Disney+' },
+      { name: 'Amazon Prime Video' },
+      { name: 'Spotify Premium Familiar' },
+      { name: 'Canva Pro' }
+    ]
+  }
+];
+
+function getComboByName(name: string) {
+  return COMBOS.find(c => c.name === name);
 }
 
-// Crear combo personalizado
+// Crear combo fijo (solo MVP)
 app.post('/api/combo', authenticateToken, async (req: AuthRequest, res: Response) => {
-  const { platformIds } = req.body;
-  if (!Array.isArray(platformIds) || platformIds.length < 2 || platformIds.length > 5) {
-    return res.status(400).json({ error: 'Debes seleccionar entre 2 y 5 plataformas.' });
-  }
-  if (new Set(platformIds).size !== platformIds.length) {
-    return res.status(400).json({ error: 'No puedes repetir plataformas.' });
+  const { comboName } = req.body;
+  const comboDef = getComboByName(comboName);
+  if (!comboDef) {
+    return res.status(400).json({ error: 'Combo no válido. Usa uno de los combos predefinidos.' });
   }
   try {
     // Verifica que el usuario no tenga un combo activo
@@ -134,29 +163,19 @@ app.post('/api/combo', authenticateToken, async (req: AuthRequest, res: Response
     if (existing) {
       return res.status(409).json({ error: 'Ya tienes un combo activo. Modifícalo en su lugar.' });
     }
-    // Calcula el precio final
-    const priceFinal = await calcularPrecioFinal(platformIds);
-    // Crea el combo y las relaciones
+    // Crea el combo (sin plataformas asociadas, solo nombre y usuario)
     const combo = await prisma.combo.create({
       data: {
         userId: req.user.id,
-        priceFinal,
-        comboPlatforms: {
-          create: platformIds.map(pid => ({ platformId: pid }))
-        }
-      },
-      include: {
-        comboPlatforms: { include: { platform: true } }
+        priceFinal: 0, // Puedes ajustar el precio fijo si lo deseas
+        status: 'ACTIVE'
       }
     });
     res.status(201).json({
       id: combo.id,
       userId: combo.userId,
-      platforms: combo.comboPlatforms.map(cp => ({
-        id: cp.platform.id,
-        name: cp.platform.name,
-        pricePerProfile: cp.platform.pricePerProfile
-      })),
+      comboName: comboDef.name,
+      platforms: comboDef.platforms,
       priceFinal: combo.priceFinal,
       status: combo.status,
       createdAt: combo.createdAt
@@ -166,22 +185,19 @@ app.post('/api/combo', authenticateToken, async (req: AuthRequest, res: Response
   }
 });
 
-// Ver combo activo
+// Ver combo activo (solo MVP)
 app.get('/api/combo', authenticateToken, async (req: AuthRequest, res: Response) => {
   try {
-    const combo = await prisma.combo.findFirst({
-      where: { userId: req.user.id, status: 'ACTIVE' },
-      include: { comboPlatforms: { include: { platform: true } } }
-    });
+    const combo = await prisma.combo.findFirst({ where: { userId: req.user.id, status: 'ACTIVE' } });
     if (!combo) return res.status(404).json({ error: 'No tienes combo activo.' });
+    // Buscar el nombre del combo en la respuesta (puedes guardar el nombre en el modelo si lo deseas)
+    // Por ahora, solo retornamos el primero de los combos fijos
+    // En producción, deberías guardar el nombre del combo en la base de datos
     res.json({
       id: combo.id,
       userId: combo.userId,
-      platforms: combo.comboPlatforms.map(cp => ({
-        id: cp.platform.id,
-        name: cp.platform.name,
-        pricePerProfile: cp.platform.pricePerProfile
-      })),
+      comboName: 'COMBO MVP',
+      platforms: [],
       priceFinal: combo.priceFinal,
       status: combo.status,
       createdAt: combo.createdAt
@@ -191,38 +207,26 @@ app.get('/api/combo', authenticateToken, async (req: AuthRequest, res: Response)
   }
 });
 
-// Modificar combo activo
+// Modificar combo activo (solo MVP)
 app.put('/api/combo', authenticateToken, async (req: AuthRequest, res: Response) => {
-  const { platformIds } = req.body;
-  if (!Array.isArray(platformIds) || platformIds.length < 2 || platformIds.length > 5) {
-    return res.status(400).json({ error: 'Debes seleccionar entre 2 y 5 plataformas.' });
-  }
-  if (new Set(platformIds).size !== platformIds.length) {
-    return res.status(400).json({ error: 'No puedes repetir plataformas.' });
+  const { comboName } = req.body;
+  const comboDef = getComboByName(comboName);
+  if (!comboDef) {
+    return res.status(400).json({ error: 'Combo no válido. Usa uno de los combos predefinidos.' });
   }
   try {
-    const combo = await prisma.combo.findFirst({ where: { userId: req.user.id, status: 'ACTIVE' }, include: { comboPlatforms: true } });
+    const combo = await prisma.combo.findFirst({ where: { userId: req.user.id, status: 'ACTIVE' } });
     if (!combo) return res.status(404).json({ error: 'No tienes combo activo.' });
-    // Actualiza plataformas y precio
-    const priceFinal = await calcularPrecioFinal(platformIds);
-    // Borra relaciones previas
-    await prisma.comboPlatform.deleteMany({ where: { comboId: combo.id } });
-    // Crea nuevas relaciones
-    await prisma.comboPlatform.createMany({ data: platformIds.map(pid => ({ comboId: combo.id, platformId: pid })) });
-    // Actualiza el combo
+    // Actualiza el combo (puedes guardar el nombre si lo agregas al modelo)
     const updated = await prisma.combo.update({
       where: { id: combo.id },
-      data: { priceFinal },
-      include: { comboPlatforms: { include: { platform: true } } }
+      data: {},
     });
     res.json({
       id: updated.id,
       userId: updated.userId,
-      platforms: updated.comboPlatforms.map(cp => ({
-        id: cp.platform.id,
-        name: cp.platform.name,
-        pricePerProfile: cp.platform.pricePerProfile
-      })),
+      comboName: comboDef.name,
+      platforms: comboDef.platforms,
       priceFinal: updated.priceFinal,
       status: updated.status,
       createdAt: updated.createdAt
