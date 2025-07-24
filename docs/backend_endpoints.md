@@ -48,7 +48,7 @@ Para endpoints protegidos:
 | POST   | /api/login     | Inicia sesión de usuario          | No            |
 | GET    | /api/platforms | Obtiene lista de plataformas      | No            |
 | GET    | /api/me        | Datos del usuario autenticado     | Sí            |
-| POST   | /api/combo     | Crea combo personalizado          | Sí            |
+| POST   | /api/combo     | Crea combo fijo (MVP)             | Sí            |
 | GET    | /api/combo     | Obtiene combo activo del usuario  | Sí            |
 | PUT    | /api/combo     | Modifica combo activo del usuario | Sí            |
 
@@ -252,17 +252,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ---
 
+
 ### POST /api/combo
 
 **Descripción:**  
-Crea un combo personalizado para el usuario autenticado.
+Crea un combo fijo (MVP) para el usuario autenticado. Solo se pueden elegir entre los combos predefinidos:
+
+- FULL STREAM: Netflix Premium, Disney+, Max (HBO), Amazon Prime Video
+- OUT OF THE BOX: Canva Pro, Spotify Premium Familiar, YouTube Premium Familiar
+- ALL IN: Netflix, Max, Disney+, Amazon Prime Video, Spotify Premium Familiar, Canva Pro
 
 **Diagrama de secuencia:**
 ![Diagrama POST /api/combo](imgs/Secuence/postcombo.png)
 
 **Parámetros requeridos:**
 
-- `platformIds` (array): Array de IDs de plataformas (entre 2 y 5)
+- `comboName` (string): Nombre del combo fijo (debe ser uno de los predefinidos)
 
 **Ejemplo de petición:**
 
@@ -270,7 +275,7 @@ Crea un combo personalizado para el usuario autenticado.
 POST /api/combo
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 {
-  "platformIds": ["netflix-id", "spotify-id", "disney-id"]
+  "comboName": "FULL STREAM"
 }
 ```
 
@@ -280,19 +285,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 {
   "id": "combo-id",
   "userId": 1,
+  "comboName": "FULL STREAM",
   "platforms": [
-    {
-      "id": "netflix-id",
-      "name": "Netflix",
-      "pricePerProfile": 15.9
-    },
-    {
-      "id": "spotify-id",
-      "name": "Spotify",
-      "pricePerProfile": 9.9
-    }
+    { "name": "Netflix Premium" },
+    { "name": "Disney+" },
+    { "name": "Max (HBO)" },
+    { "name": "Amazon Prime Video" }
   ],
-  "priceFinal": 40,
+  "priceFinal": 0,
   "status": "ACTIVE",
   "createdAt": "2025-07-21T10:30:00.000Z"
 }
@@ -300,7 +300,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 **Posibles errores:**
 
-- 400: Número inválido de plataformas o plataformas repetidas
+- 400: Combo no válido (nombre incorrecto)
 - 409: Ya tienes un combo activo
 - 401/403: Problemas de autenticación
 

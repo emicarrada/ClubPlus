@@ -69,9 +69,10 @@ Define las plataformas de streaming disponibles (Netflix, Spotify, etc.).
 
 ---
 
+
 ### Combo
 
-Representa la combinación personalizada de plataformas que crea un usuario.
+Representa un combo fijo de plataformas predefinido que el usuario puede elegir (no personalizado en el MVP).
 
 **Campos:**
 
@@ -91,9 +92,10 @@ Representa la combinación personalizada de plataformas que crea un usuario.
 
 ---
 
+
 ### ComboPlatform (Plataforma del Combo)
 
-Tabla de relación entre combos y plataformas (many-to-many).
+Tabla de relación entre combos y plataformas. En el MVP, cada combo corresponde a una lista fija de plataformas predefinidas.
 
 **Campos:**
 
