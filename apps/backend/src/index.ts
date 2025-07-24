@@ -82,6 +82,21 @@ app.get('/api/platforms', async (req: Request, res: Response) => {
   }
 });
 
+// Endpoint para consultar planes disponibles
+app.get('/api/plans', async (req: Request, res: Response) => {
+  try {
+    const plans = await prisma.plan.findMany({
+      where: { isActive: true },
+      include: {
+        platform: true
+      }
+    });
+    res.json(plans);
+  } catch (err) {
+    res.status(500).json({ error: 'Error al obtener planes', details: err });
+  }
+});
+
 // Extiende el tipo Request para incluir user y body correctamente
 interface AuthRequest extends Request {
   user?: any;
@@ -113,69 +128,57 @@ app.get('/api/me', authenticateToken, async (req: AuthRequest, res: Response) =>
   }
 });
 
+// Aquí irán los endpoints del MVP (usuarios, combos, pagos, etc.)
 
-// Definición de combos fijos para el MVP
-const COMBOS = [
-  {
-    name: 'FULL STREAM',
-    platforms: [
-      { name: 'Netflix Premium' },
-      { name: 'Disney+' },
-      { name: 'Max (HBO)' },
-      { name: 'Amazon Prime Video' }
-    ]
-  },
-  {
-    name: 'OUT OF THE BOX',
-    platforms: [
-      { name: 'Canva Pro' },
-      { name: 'Spotify Premium Familiar' },
-      { name: 'YouTube Premium Familiar' }
-    ]
-  },
-  {
-    name: 'ALL IN',
-    platforms: [
-      { name: 'Netflix' },
-      { name: 'Max' },
-      { name: 'Disney+' },
-      { name: 'Amazon Prime Video' },
-      { name: 'Spotify Premium Familiar' },
-      { name: 'Canva Pro' }
-    ]
-  }
-];
-
-function getComboByName(name: string) {
-  return COMBOS.find(c => c.name === name);
-}
-
-// Crear combo fijo (solo MVP)
+// Crear combo con plan específico (MVP simplificado)
 app.post('/api/combo', authenticateToken, async (req: AuthRequest, res: Response) => {
-  const { comboName } = req.body;
-  const comboDef = getComboByName(comboName);
-  if (!comboDef) {
-    return res.status(400).json({ error: 'Combo no válido. Usa uno de los combos predefinidos.' });
+  const { planId } = req.body;
+  if (!planId) {
+    return res.status(400).json({ error: 'planId es requerido' });
   }
   try {
+    // Verificar que el plan existe y está activo
+    const plan = await prisma.plan.findFirst({ 
+      where: { id: planId, isActive: true },
+      include: { platform: true }
+    });
+    if (!plan) {
+      return res.status(404).json({ error: 'Plan no encontrado o inactivo' });
+    }
+
     // Verifica que el usuario no tenga un combo activo
     const existing = await prisma.combo.findFirst({ where: { userId: req.user.id, status: 'ACTIVE' } });
     if (existing) {
       return res.status(409).json({ error: 'Ya tienes un combo activo. Modifícalo en su lugar.' });
     }
-    // Crea el combo (sin plataformas asociadas, solo nombre y usuario)
+
+    // Crea el combo con el plan seleccionado
     const combo = await prisma.combo.create({
       data: {
         userId: req.user.id,
-        priceFinal: 0, // Puedes ajustar el precio fijo si lo deseas
+        planId: plan.id,
+        priceFinal: plan.price,
         status: 'ACTIVE'
+      },
+      include: {
+        plan: {
+          include: {
+            platform: true
+          }
+        }
       }
     });
+
     res.status(201).json({
       id: combo.id,
       userId: combo.userId,
-      comboName: comboDef.name,
-      platforms: comboDef.platforms,
+      plan: {
+        id: combo.plan.id,
+        name: combo.plan.name,
+        description: combo.plan.description,
+        price: combo.plan.price,
+        platform: combo.plan.platform
+      },
       priceFinal: combo.priceFinal,
       status: combo.status,
       createdAt: combo.createdAt
@@ -185,19 +188,31 @@ app.post('/api/combo', authenticateToken, async (req: AuthRequest, res: Response
   }
 });
 
-// Ver combo activo (solo MVP)
+// Ver combo activo (MVP simplificado)
 app.get('/api/combo', authenticateToken, async (req: AuthRequest, res: Response) => {
   try {
-    const combo = await prisma.combo.findFirst({ where: { userId: req.user.id, status: 'ACTIVE' } });
+    const combo = await prisma.combo.findFirst({ 
+      where: { userId: req.user.id, status: 'ACTIVE' },
+      include: {
+        plan: {
+          include: {
+            platform: true
+          }
+        }
+      }
+    });
     if (!combo) return res.status(404).json({ error: 'No tienes combo activo.' });
-    // Buscar el nombre del combo en la respuesta (puedes guardar el nombre en el modelo si lo deseas)
-    // Por ahora, solo retornamos el primero de los combos fijos
-    // En producción, deberías guardar el nombre del combo en la base de datos
+    
     res.json({
       id: combo.id,
       userId: combo.userId,
-      comboName: 'COMBO MVP',
-      platforms: [],
+      plan: {
+        id: combo.plan.id,
+        name: combo.plan.name,
+        description: combo.plan.description,
+        price: combo.plan.price,
+        platform: combo.plan.platform
+      },
       priceFinal: combo.priceFinal,
       status: combo.status,
       createdAt: combo.createdAt
@@ -207,26 +222,51 @@ app.get('/api/combo', authenticateToken, async (req: AuthRequest, res: Response)
   }
 });
 
-// Modificar combo activo (solo MVP)
+// Modificar combo activo (MVP simplificado)
 app.put('/api/combo', authenticateToken, async (req: AuthRequest, res: Response) => {
-  const { comboName } = req.body;
-  const comboDef = getComboByName(comboName);
-  if (!comboDef) {
-    return res.status(400).json({ error: 'Combo no válido. Usa uno de los combos predefinidos.' });
+  const { planId } = req.body;
+  if (!planId) {
+    return res.status(400).json({ error: 'planId es requerido' });
   }
   try {
+    // Verificar que el plan existe y está activo
+    const plan = await prisma.plan.findFirst({ 
+      where: { id: planId, isActive: true },
+      include: { platform: true }
+    });
+    if (!plan) {
+      return res.status(404).json({ error: 'Plan no encontrado o inactivo' });
+    }
+
     const combo = await prisma.combo.findFirst({ where: { userId: req.user.id, status: 'ACTIVE' } });
     if (!combo) return res.status(404).json({ error: 'No tienes combo activo.' });
-    // Actualiza el combo (puedes guardar el nombre si lo agregas al modelo)
+    
+    // Actualiza el combo con el nuevo plan
     const updated = await prisma.combo.update({
       where: { id: combo.id },
-      data: {},
+      data: {
+        planId: plan.id,
+        priceFinal: plan.price
+      },
+      include: {
+        plan: {
+          include: {
+            platform: true
+          }
+        }
+      }
     });
+    
     res.json({
       id: updated.id,
       userId: updated.userId,
-      comboName: comboDef.name,
-      platforms: comboDef.platforms,
+      plan: {
+        id: updated.plan.id,
+        name: updated.plan.name,
+        description: updated.plan.description,
+        price: updated.plan.price,
+        platform: updated.plan.platform
+      },
       priceFinal: updated.priceFinal,
       status: updated.status,
       createdAt: updated.createdAt

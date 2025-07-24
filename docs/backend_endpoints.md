@@ -34,6 +34,7 @@ Para endpoints protegidos:
 - [POST /api/register](#post-apiregister)
 - [POST /api/login](#post-apilogin)
 - [GET /api/platforms](#get-apiplatforms)
+- [GET /api/plans](#get-apiplans)
 - [GET /api/me](#get-apime)
 - [POST /api/combo](#post-apicombo)
 - [GET /api/combo](#get-apicombo)
@@ -47,6 +48,7 @@ Para endpoints protegidos:
 | POST   | /api/register  | Registra un nuevo usuario         | No            |
 | POST   | /api/login     | Inicia sesión de usuario          | No            |
 | GET    | /api/platforms | Obtiene lista de plataformas      | No            |
+| GET    | /api/plans     | Obtiene lista de planes activos   | No            |
 | GET    | /api/me        | Datos del usuario autenticado     | Sí            |
 | POST   | /api/combo     | Crea combo fijo (MVP)             | Sí            |
 | GET    | /api/combo     | Obtiene combo activo del usuario  | Sí            |
@@ -204,17 +206,88 @@ GET /api/platforms
 ```json
 [
   {
-    "id": "netflix-id",
-    "name": "Netflix",
-    "pricePerProfile": 15.9
+    "id": "canva-pro-id",
+    "name": "Canva Pro",
+    "logoUrl": "https://canva.com/logo.png",
+    "pricePerProfile": 12.99
   },
   {
-    "id": "spotify-id",
-    "name": "Spotify",
-    "pricePerProfile": 9.9
+    "id": "hbo-max-id",
+    "name": "HBO Max",
+    "logoUrl": "https://hbomax.com/logo.png",
+    "pricePerProfile": 15.99
+  },
+  {
+    "id": "disney-plus-id",
+    "name": "Disney+",
+    "logoUrl": "https://disneyplus.com/logo.png",
+    "pricePerProfile": 10.99
   }
 ]
 ```
+
+---
+
+### GET /api/plans
+
+**Descripción:**  
+Obtiene la lista de todos los planes activos disponibles para contratar. Cada plan incluye información de la plataforma asociada.
+
+**Ejemplo de petición:**
+
+```http
+GET /api/plans
+```
+
+**Ejemplo de respuesta:**
+
+```json
+[
+  {
+    "id": "plan-creativo-id",
+    "name": "Plan Creativo",
+    "description": "Perfecto para diseñadores y creadores de contenido",
+    "price": 9.99,
+    "isActive": true,
+    "platform": {
+      "id": "canva-pro-id",
+      "name": "Canva Pro",
+      "logoUrl": "https://canva.com/logo.png",
+      "pricePerProfile": 12.99
+    }
+  },
+  {
+    "id": "plan-entretenimiento-id",
+    "name": "Plan Entretenimiento",
+    "description": "Lo mejor en series y películas de HBO",
+    "price": 12.99,
+    "isActive": true,
+    "platform": {
+      "id": "hbo-max-id",
+      "name": "HBO Max",
+      "logoUrl": "https://hbomax.com/logo.png",
+      "pricePerProfile": 15.99
+    }
+  },
+  {
+    "id": "plan-familiar-id",
+    "name": "Plan Familiar",
+    "description": "Contenido para toda la familia con Disney+",
+    "price": 8.99,
+    "isActive": true,
+    "platform": {
+      "id": "disney-plus-id",
+      "name": "Disney+",
+      "logoUrl": "https://disneyplus.com/logo.png",
+      "pricePerProfile": 10.99
+    }
+  }
+]
+```
+
+**Posibles errores:**
+
+- 500: Error interno del servidor
 
 ---
 
@@ -256,18 +329,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ### POST /api/combo
 
 **Descripción:**  
-Crea un combo fijo (MVP) para el usuario autenticado. Solo se pueden elegir entre los combos predefinidos:
+Crea un combo para el usuario autenticado basado en uno de los 3 planes disponibles en el MVP:
 
-- FULL STREAM: Netflix Premium, Disney+, Max (HBO), Amazon Prime Video
-- OUT OF THE BOX: Canva Pro, Spotify Premium Familiar, YouTube Premium Familiar
-- ALL IN: Netflix, Max, Disney+, Amazon Prime Video, Spotify Premium Familiar, Canva Pro
+- Plan Creativo (Canva Pro): $9.99
+- Plan Entretenimiento (HBO Max): $12.99  
+- Plan Familiar (Disney+): $8.99
 
 **Diagrama de secuencia:**
 ![Diagrama POST /api/combo](imgs/Secuence/postcombo.png)
 
 **Parámetros requeridos:**
 
-- `comboName` (string): Nombre del combo fijo (debe ser uno de los predefinidos)
+- `planId` (string): ID del plan que se desea contratar
 
 **Ejemplo de petición:**
 
@@ -275,7 +348,7 @@ Crea un combo fijo (MVP) para el usuario autenticado. Solo se pueden elegir entr
 POST /api/combo
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 {
-  "comboName": "FULL STREAM"
+  "planId": "plan-creativo-id"
 }
 ```
 
@@ -284,23 +357,29 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```json
 {
   "id": "combo-id",
-  "userId": 1,
-  "comboName": "FULL STREAM",
-  "platforms": [
-    { "name": "Netflix Premium" },
-    { "name": "Disney+" },
-    { "name": "Max (HBO)" },
-    { "name": "Amazon Prime Video" }
-  ],
-  "priceFinal": 0,
+  "userId": "user-id",
+  "plan": {
+    "id": "plan-creativo-id",
+    "name": "Plan Creativo",
+    "description": "Perfecto para diseñadores y creadores de contenido",
+    "price": 9.99,
+    "platform": {
+      "id": "canva-pro-id",
+      "name": "Canva Pro",
+      "logoUrl": "https://canva.com/logo.png",
+      "pricePerProfile": 12.99
+    }
+  },
+  "priceFinal": 9.99,
   "status": "ACTIVE",
-  "createdAt": "2025-07-21T10:30:00.000Z"
+  "createdAt": "2025-07-24T10:30:00.000Z"
 }
 ```
 
 **Posibles errores:**
 
-- 400: Combo no válido (nombre incorrecto)
+- 400: planId es requerido
+- 404: Plan no encontrado o inactivo
 - 409: Ya tienes un combo activo
 - 401/403: Problemas de autenticación
 
@@ -309,7 +388,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ### GET /api/combo
 
 **Descripción:**  
-Obtiene el combo activo del usuario autenticado.
+Obtiene el combo activo del usuario autenticado con información detallada del plan y plataforma contratados.
 
 **Diagrama de secuencia:**
 ![Diagrama GET /api/combo](imgs/Secuence/getcombo.png)
@@ -326,17 +405,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```json
 {
   "id": "combo-id",
-  "userId": 1,
-  "platforms": [
-    {
-      "id": "netflix-id",
-      "name": "Netflix",
-      "pricePerProfile": 15.9
+  "userId": "user-id",
+  "plan": {
+    "id": "plan-entretenimiento-id",
+    "name": "Plan Entretenimiento",
+    "description": "Lo mejor en series y películas de HBO",
+    "price": 12.99,
+    "platform": {
+      "id": "hbo-max-id",
+      "name": "HBO Max",
+      "logoUrl": "https://hbomax.com/logo.png",
+      "pricePerProfile": 15.99
     }
-  ],
-  "priceFinal": 40,
+  },
+  "priceFinal": 12.99,
   "status": "ACTIVE",
-  "createdAt": "2025-07-21T10:30:00.000Z"
+  "createdAt": "2025-07-24T10:30:00.000Z"
 }
 ```
 
@@ -350,14 +434,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ### PUT /api/combo
 
 **Descripción:**  
-Modifica el combo activo del usuario autenticado.
+Modifica el combo activo del usuario autenticado, cambiando a un plan diferente de los 3 disponibles en el MVP.
 
 **Diagrama de secuencia:**
 ![Diagrama PUT /api/combo](imgs/Secuence/putcombo.png)
 
 **Parámetros requeridos:**
 
-- `platformIds` (array): Array de IDs de plataformas (entre 2 y 5)
+- `planId` (string): ID del nuevo plan al que se desea cambiar
 
 **Ejemplo de petición:**
 
@@ -365,7 +449,7 @@ Modifica el combo activo del usuario autenticado.
 PUT /api/combo
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 {
-  "platformIds": ["netflix-id", "amazon-prime-id"]
+  "planId": "plan-familiar-id"
 }
 ```
 
@@ -374,38 +458,40 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```json
 {
   "id": "combo-id",
-  "userId": 1,
-  "platforms": [
-    {
-      "id": "netflix-id",
-      "name": "Netflix",
-      "pricePerProfile": 15.9
-    },
-    {
-      "id": "amazon-prime-id",
-      "name": "Amazon Prime",
-      "pricePerProfile": 12.9
+  "userId": "user-id",
+  "plan": {
+    "id": "plan-familiar-id",
+    "name": "Plan Familiar",
+    "description": "Contenido para toda la familia con Disney+",
+    "price": 8.99,
+    "platform": {
+      "id": "disney-plus-id",
+      "name": "Disney+",
+      "logoUrl": "https://disneyplus.com/logo.png",
+      "pricePerProfile": 10.99
     }
-  ],
-  "priceFinal": 45,
+  },
+  "priceFinal": 8.99,
   "status": "ACTIVE",
-  "createdAt": "2025-07-21T10:30:00.000Z"
+  "createdAt": "2025-07-24T10:30:00.000Z"
 }
 ```
 
 **Posibles errores:**
 
-- 400: Número inválido de plataformas o plataformas repetidas
-- 404: No tienes combo activo
+- 400: planId es requerido
+- 404: Plan no encontrado, inactivo o no tienes combo activo
 - 401/403: Problemas de autenticación
 
 ---
 
-## Notas
+## Notas para el MVP
 
 - **Autenticación**: Los endpoints protegidos requieren el header `Authorization: Bearer <token>`
-- **Margen de precio**: Los combos aplican un margen de 1.55x sobre el precio base de las plataformas
+- **Planes disponibles**: Solo 3 planes fijos: Plan Creativo (Canva Pro), Plan Entretenimiento (HBO Max), Plan Familiar (Disney+)
+- **Precios fijos**: Cada plan tiene un precio fijo sin márgenes adicionales
 - **Límites de combo**: Cada usuario puede tener solo un combo activo a la vez
+- **Simplicidad**: El MVP se enfoca en 3 plataformas específicas para validar el modelo de negocio
 - **Validaciones**: No se permiten plataformas duplicadas en un combo
 - **Actualización**: Mantén este documento sincronizado con cambios en `apps/backend/src/index.ts`
 
