@@ -1,0 +1,24 @@
+{
+  "name": "@clubplus/prisma",
+  "version": "1.0.0",
+  "description": "Club+ Prisma database package",
+  "main": "index.js",
+  "scripts": {
+    "db:migrate": "prisma migrate dev",
+    "db:reset": "prisma migrate reset",
+    "db:seed": "tsx seed.ts",
+    "db:studio": "prisma studio",
+    "generate": "prisma generate"
+  },
+  "prisma": {
+    "seed": "tsx seed.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.22.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.8.0"
+  }
+}

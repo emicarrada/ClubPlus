@@ -1,150 +1,97 @@
-# Club+
+# Club+ MVP
 
-Club+es una plataforma web que permite a usuarios en México acceder a combos personalizados de plataformas digitales (Netflix, Disney+, Spotify, etc.) a precios accesibles. Los usuarios seleccionan dos o más plataformas, pagan mensualmente y reciben perfiles individuales dentro de cuentas administradas por Club+. Todo el proceso es 100% automatizado, desde la compra hasta la asignación de perfiles y renovaciones.
+Club+ es una plataforma web que permite a usuarios en México acceder a combos prediseñados de plataformas digitales compartidas a precios accesibles.
 
-## Arquitectura General
+## 🎯 MVP - Combos Disponibles
 
-- **Monorepo**: apps/backend (Node.js + Express), apps/frontend (React + Tailwind), packages/prisma (Prisma ORM), automation (n8n workflows)
+- **Combo Entretenimiento**: Disney+ + HBO Max
+- **Combo Creativo**: Disney+ + Canva Pro  
+- **Combo Completo**: Disney+ + HBO Max + Canva Pro
 
-## Estado Actual del Proyecto
+## 🛠️ Stack Tecnológico
 
-**Estado actual del proyecto (15 de julio de 2025)**
+- **Frontend**: React + Tailwind CSS
+- **Backend**: Node.js + Express + TypeScript
+- **Base de datos**: PostgreSQL + Prisma ORM
+- **Autenticación**: JWT
+- **Pagos**: Stripe/MercadoPago
+- **Automatización**: n8n
+- **Despliegue**: Railway
 
-- El backend está iniciado, con estructura en `apps/backend` y archivo principal `src/index.ts`.
-- Hay un esquema de base de datos en `packages/prisma/schema.prisma` y migraciones previas.
-- El frontend tiene carpeta, pero no se observa estructura ni documentación inicial.
-- Existe la carpeta `docs/`, actualmente con `docs/backend_endpoints.md`, `docs/db_review.md` y `docs/frontend_structure.md`. Los cuales explican los endpoints del backend, la revisión de la base de datos y la estructura del frontend respectivamente.
-- No se visualizan pruebas unitarias ni documentación de despliegue.
+## 📁 Estructura del Proyecto
 
----
+```
+Club+/
+├── apps/
+│   ├── backend/          # API REST con Node.js + Express
+│   └── frontend/         # React + Tailwind CSS
+├── packages/
+│   └── prisma/          # Esquema de base de datos y migraciones
+├── automation/          # Workflows de n8n
+└── docs/               # Documentación técnica
+```
 
-## Timeline por semanas
+## 🚀 Inicio Rápido
 
-### Timeline Fullstack MVP ClubPlus
+### Requisitos
+- Node.js 18+
+- PostgreSQL
+- npm o yarn
 
-#### Semana 1: 16–20 julio
+### Instalación
+```bash
+# Clonar repositorio
+git clone <repo-url>
+cd Club+
 
-**Backend**
+# Instalar dependencias
+npm install
 
-- Documentar endpoints existentes (`docs/backend_endpoints.md`).
-- Revisar y documentar modelos de base de datos (`docs/db_review.md`).
+# Configurar base de datos
+cd packages/prisma
+cp .env.example .env
+# Editar .env con tu DATABASE_URL
 
-**Frontend**
+# Ejecutar migraciones
+npx prisma migrate dev
 
-- Configurar entorno de desarrollo frontend.
-- Crear estructura base del proyecto en frontend.
-- Documentar estructura inicial (`docs/frontend_structure.md`).
+# Seed inicial
+npx prisma db seed
 
-**Entregables:**
+# Iniciar backend
+cd ../../apps/backend
+npm run dev
 
-- docs/backend_endpoints.md
-- docs/db_review.md
-- docs/frontend_structure.md
-- Estructura base en frontend
+# Iniciar frontend (nueva terminal)
+cd ../frontend
+npm run dev
+```
 
-#### Semana 2: 21–27 julio
+## 📊 Estado del Proyecto
 
-**Backend**
+**Versión**: MVP 1.0  
+**Fecha**: Julio 2025  
+**Estado**: En desarrollo
 
-- Implementar endpoints de registro y login de usuario.
-- Pruebas unitarias de autenticación.
-- Documentar endpoints y pruebas.
+### ✅ Completado
+- [ ] Estructura base del proyecto
+- [ ] Esquema de base de datos
+- [ ] Autenticación JWT
+- [ ] CRUD de combos
+- [ ] Frontend básico
 
-**Frontend**
+### 🚧 En progreso
+- [ ] Integración de pagos
+- [ ] Automatizaciones n8n
+- [ ] Dashboard de usuario
+- [ ] Panel administrativo
 
-- Crear pantallas de registro y login.
-- Integrar llamadas a los endpoints de autenticación.
-- Documentar flujo de autenticación (`docs/auth_flow.md`).
+### 📋 Por hacer
+- [ ] Sistema de referidos
+- [ ] Notificaciones
+- [ ] Testing
+- [ ] Despliegue
 
-**Entregables:**
+## 📄 Licencia
 
-- Endpoints y pruebas de autenticación
-- Pantallas de registro/login funcionales
-- docs/auth_flow.md
-
-#### Semana 3: 28 julio–3 agosto
-
-**Backend**
-
-- Implementar CRUD de combos.
-- Migraciones y documentación (`docs/migration_log.md`).
-
-**Frontend**
-
-- Crear pantallas para gestión de combos (listar, crear, editar, eliminar).
-- Integrar llamadas a endpoints de combos.
-- Documentar uso de combos en frontend (`docs/combos_frontend.md`).
-
-**Entregables:**
-
-- Endpoints y migraciones de combos
-- Pantallas de combos funcionales
-- docs/combos_frontend.md
-- docs/migration_log.md
-
-#### Semana 4: 4–10 agosto
-
-**Backend**
-
-- Implementar CRUD de socios.
-- Pruebas unitarias y documentación.
-
-**Frontend**
-
-- Crear pantallas para gestión de socios (listar, crear, editar, eliminar).
-- Integrar llamadas a endpoints de socios.
-- Documentar uso de socios en frontend (`docs/socios_frontend.md`).
-
-**Entregables:**
-
-- Endpoints y pruebas de socios
-- Pantallas de socios funcionales
-- docs/socios_frontend.md
-
-#### Semana 5: 11–17 agosto
-
-**Backend**
-
-- Mejorar seguridad y validaciones globales.
-- Documentar seguridad (`docs/security.md`).
-
-**Frontend**
-
-- Mejorar validaciones en formularios y manejo de errores.
-- Documentar validaciones frontend (`docs/frontend_validations.md`).
-
-**Entregables:**
-
-- Código backend con seguridad mejorada
-- docs/security.md
-- Formularios frontend con validaciones
-- docs/frontend_validations.md
-
-#### Semana 6: 18–24 agosto
-
-**Backend**
-
-- Refactorizar código y ejecutar pruebas integrales.
-- Documentar despliegue (`docs/deployment.md`).
-
-**Frontend**
-
-- Refactorizar componentes y estilos.
-- Pruebas integrales de flujo completo.
-- Documentar despliegue frontend (`docs/frontend_deployment.md`).
-
-**Entregables:**
-
-- Backend refactorizado y probado
-- docs/deployment.md
-- Frontend refactorizado y probado
-- docs/frontend_deployment.md
-
----
-
-## Indicaciones Claras
-
-- Cada semana debe finalizar con los entregables listados subidos al repositorio.
-- La documentación debe estar en la carpeta `docs/` y ser clara para nuevos voluntarios.
-- Los endpoints y pantallas deben estar probados y documentados.
-- El MVP debe estar listo para pruebas y despliegue al final de la semana 6.
+MIT License - ver [LICENSE](LICENSE)

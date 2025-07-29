@@ -1,5 +1,5 @@
-// Esquema inicial de Club+ para PostgreSQL usando Prisma ORM
-// Este modelo cubre usuarios, plataformas, combos, cuentas, perfiles, asignaciones, pagos, suscripciones y renovaciones
+// Club+ MVP - Schema de base de datos
+// Combos: Disney++HBO Max, Disney++Canva Pro, Disney++HBO Max+Canva Pro
 
 generator client {
   provider = "prisma-client-js"
@@ -10,6 +10,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// === MODELOS PRINCIPALES ===
+
 model User {
   id           String    @id @default(uuid())
   email        String    @unique
@@ -17,61 +19,90 @@ model User {
   name         String
   phone        String?
   createdAt    DateTime  @default(now())
+  
+  // Relaciones
   combos       Combo[]
   assignments  Assignment[]
   payments     Payment[]
   subscriptions Subscription[]
+  referrals    Referral[] @relation("UserReferrals")
+  referredBy   Referral[] @relation("UserReferred")
 }
 
 model Platform {
-  id                String    @id @default(uuid())
-  name              String    @unique
-  logoUrl           String?
-  pricePerProfile   Float
-  description       String?
+  id          String    @id @default(uuid())
+  name        String    @unique // "Disney+", "HBO Max", "Canva Pro"
+  logoUrl     String?
+  description String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  
+  // Relaciones
   accounts          Account[]
-  plan              Plan?
+  comboPlatforms    ComboPlatform[]
 }
 
-model Plan {
+model ComboTemplate {
   id          String    @id @default(uuid())
-  name        String    @unique
+  name        String    @unique // "Combo Entretenimiento", "Combo Creativo", "Combo Completo"
   description String?
-  price       Float
-  platform    Platform  @relation(fields: [platformId], references: [id])
-  platformId  String    @unique
+  price       Float?    // Precio a definir
   isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  
+  // Relaciones
+  platforms   ComboPlatform[]
   combos      Combo[]
 }
 
+model ComboPlatform {
+  id              String        @id @default(uuid())
+  comboTemplate   ComboTemplate @relation(fields: [comboTemplateId], references: [id], onDelete: Cascade)
+  comboTemplateId String
+  platform        Platform      @relation(fields: [platformId], references: [id], onDelete: Cascade)
+  platformId      String
+  
+  @@unique([comboTemplateId, platformId])
+}
+
 model Combo {
-  id         String    @id @default(uuid())
-  user       User      @relation(fields: [userId], references: [id])
-  userId     String
-  plan       Plan      @relation(fields: [planId], references: [id])
-  planId     String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  status     ComboStatus @default(ACTIVE)
-  priceFinal Float
-  payments    Payment[]
-  subscription Subscription?
+  id              String        @id @default(uuid())
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String
+  comboTemplate   ComboTemplate @relation(fields: [comboTemplateId], references: [id])
+  comboTemplateId String
+  status          ComboStatus   @default(ACTIVE)
+  priceFinal      Float
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  // Relaciones
+  payments      Payment[]
+  subscription  Subscription?
+  
+  @@unique([userId, status], name: "one_active_combo_per_user")
 }
 
 enum ComboStatus {
   ACTIVE
   CANCELLED
+  SUSPENDED
 }
 
+// === GESTIÓN DE CUENTAS Y PERFILES ===
+
 model Account {
-  id          String    @id @default(uuid())
-  platform    Platform  @relation(fields: [platformId], references: [id])
+  id          String        @id @default(uuid())
+  platform    Platform      @relation(fields: [platformId], references: [id])
   platformId  String
   email       String
-  password    String
+  password    String        // Encriptado
   status      AccountStatus @default(ACTIVE)
+  maxProfiles Int           @default(4) // Límite de perfiles por cuenta
+  createdAt   DateTime      @default(now())
+  
+  // Relaciones
   profiles    Profile[]
-  createdAt   DateTime  @default(now())
 }
 
 enum AccountStatus {
@@ -81,11 +112,15 @@ enum AccountStatus {
 }
 
 model Profile {
-  id         String    @id @default(uuid())
-  account    Account   @relation(fields: [accountId], references: [id])
-  accountId  String
+  id          String        @id @default(uuid())
+  account     Account       @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  accountId   String
   profileName String
-  status     ProfileStatus @default(AVAILABLE)
+  avatarUrl   String?
+  status      ProfileStatus @default(AVAILABLE)
+  createdAt   DateTime      @default(now())
+  
+  // Relaciones
   assignments Assignment[]
 }
 
@@ -96,43 +131,58 @@ enum ProfileStatus {
 }
 
 model Assignment {
-  id         String    @id @default(uuid())
-  user       User      @relation(fields: [userId], references: [id])
-  userId     String
-  profile    Profile   @relation(fields: [profileId], references: [id])
-  profileId  String
-  assignedAt DateTime  @default(now())
-  releasedAt DateTime?
+  id          String    @id @default(uuid())
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  profile     Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId   String
+  assignedAt  DateTime  @default(now())
+  releasedAt  DateTime?
+  
+  @@unique([userId, profileId], name: "unique_user_profile_assignment")
 }
 
+// === PAGOS Y SUSCRIPCIONES ===
+
 model Payment {
-  id           String    @id @default(uuid())
-  user         User      @relation(fields: [userId], references: [id])
+  id           String        @id @default(uuid())
+  user         User          @relation(fields: [userId], references: [id])
   userId       String
-  combo        Combo     @relation(fields: [comboId], references: [id])
+  combo        Combo         @relation(fields: [comboId], references: [id])
   comboId      String
   amount       Float
+  currency     String        @default("MXN")
   status       PaymentStatus
-  provider     String
+  provider     String        // "stripe" | "mercadopago"
+  externalId   String?       // ID del proveedor de pago
   reference    String
-  paidAt       DateTime
+  metadata     Json?         // Datos adicionales del pago
+  paidAt       DateTime?
+  createdAt    DateTime      @default(now())
 }
 
 enum PaymentStatus {
+  PENDING
   PAID
   FAILED
   REFUNDED
+  CANCELLED
 }
 
 model Subscription {
-  id           String    @id @default(uuid())
-  user         User      @relation(fields: [userId], references: [id])
+  id           String             @id @default(uuid())
+  user         User               @relation(fields: [userId], references: [id])
   userId       String
-  combo        Combo     @relation(fields: [comboId], references: [id])
-  comboId      String   @unique
-  status       SubscriptionStatus
-  startDate    DateTime
-  endDate      DateTime
+  combo        Combo              @relation(fields: [comboId], references: [id])
+  comboId      String             @unique
+  status       SubscriptionStatus @default(ACTIVE)
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  cancelAtPeriodEnd  Boolean        @default(false)
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  
+  // Relaciones
   renewals     Renewal[]
 }
 
@@ -140,18 +190,44 @@ enum SubscriptionStatus {
   ACTIVE
   CANCELLED
   SUSPENDED
+  PAST_DUE
 }
 
 model Renewal {
-  id              String    @id @default(uuid())
-  subscription    Subscription @relation(fields: [subscriptionId], references: [id])
+  id              String        @id @default(uuid())
+  subscription    Subscription  @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
   subscriptionId  String
-  renewalDate     DateTime
+  amount          Float
+  currency        String        @default("MXN")
   status          RenewalStatus
-  notes           String?
+  attemptedAt     DateTime      @default(now())
+  succeededAt     DateTime?
+  failureReason   String?
+  nextAttemptAt   DateTime?
+  
+  @@index([subscription.id, status])
 }
 
 enum RenewalStatus {
   SUCCESS
   FAILED
+  PENDING
+  CANCELLED
+}
+
+// === SISTEMA DE REFERIDOS ===
+
+model Referral {
+  id           String    @id @default(uuid())
+  referrer     User      @relation("UserReferrals", fields: [referrerId], references: [id])
+  referrerId   String
+  referred     User      @relation("UserReferred", fields: [referredId], references: [id])
+  referredId   String
+  code         String    @unique
+  status       String    @default("PENDING") // PENDING, COMPLETED, EXPIRED
+  reward       Float?    // Recompensa para el referrer
+  createdAt    DateTime  @default(now())
+  completedAt  DateTime?
+  
+  @@unique([referrerId, referredId])
 }
