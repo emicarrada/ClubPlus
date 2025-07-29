@@ -1,5 +1,8 @@
 // Club+ MVP - Schema de base de datos
-// Combos: Disney++HBO Max, Disney++Canva Pro, Disney++HBO Max+Canva Pro
+// Combos: 
+// 1. Disney+ + HBO Max (Entretenimiento)
+// 2. Disney+ + Canva Pro (Creativo)  
+// 3. Disney+ + HBO Max + Canva Pro (Completo)
 
 generator client {
   provider = "prisma-client-js"

@@ -6,7 +6,7 @@ Club+ es una plataforma web que permite a usuarios en México acceder a combos p
 
 - **Combo Entretenimiento**: Disney+ + HBO Max
 - **Combo Creativo**: Disney+ + Canva Pro  
-- **Combo Completo**: Disney+ + HBO Max + Canva Pro
+- **Combo Completo**: Disney+ + HBO Max + Canva Pro (3 plataformas)
 
 ## 🛠️ Stack Tecnológico
 
