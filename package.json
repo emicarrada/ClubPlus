@@ -15,7 +15,8 @@
     "build:backend": "cd apps/backend && npm run build",
     "db:migrate": "cd packages/prisma && npx prisma migrate dev",
     "db:seed": "cd packages/prisma && npx prisma db seed",
-    "db:reset": "cd packages/prisma && npx prisma migrate reset"
+    "db:reset": "cd packages/prisma && npx prisma migrate reset",
+    "start": "cd apps/backend && npm run start"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
