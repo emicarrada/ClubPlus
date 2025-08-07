@@ -208,7 +208,7 @@ model Renewal {
   failureReason   String?
   nextAttemptAt   DateTime?
   
-  @@index([subscription.id, status])
+  @@index([subscriptionId, status])
 }
 
 enum RenewalStatus {
