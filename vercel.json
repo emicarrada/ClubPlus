@@ -1,0 +1,63 @@
+{
+  "version": 2,
+  "name": "clubplus-frontend",
+  "builds": [
+    {
+      "src": "apps/frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "apps/frontend/dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://clubplus-api.railway.app/api/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://clubplus-api.railway.app/api/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
+  "env": {
+    "VITE_API_URL": "https://clubplus-api.railway.app",
+    "VITE_NODE_ENV": "production",
+    "VITE_APP_NAME": "Club+",
+    "VITE_ENABLE_ANALYTICS": "true"
+  },
+  "build": {
+    "env": {
+      "VITE_API_URL": "https://clubplus-api.railway.app",
+      "VITE_NODE_ENV": "production"
+    }
+  }
+}

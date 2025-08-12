@@ -8,26 +8,37 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev:backend",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd apps/backend && npm run dev",
-    "build": "npm run build:backend",
+    "dev:frontend": "cd apps/frontend && npm run dev",
+    "build": "npm run build:backend && npm run build:frontend",
     "build:backend": "cd apps/backend && npm run build",
+    "build:frontend": "cd apps/frontend && npm run build",
     "start": "cd apps/backend && npm run start",
-    "test": "npm run test:backend",
+    "preview:frontend": "cd apps/frontend && npm run preview",
+    "test": "npm run test:backend && npm run test:frontend",
     "test:backend": "cd apps/backend && npm run test",
-    "lint": "npm run lint:backend",
-    "lint:fix": "npm run lint:fix:backend",
+    "test:frontend": "cd apps/frontend && npm run test",
+    "lint": "npm run lint:backend && npm run lint:frontend",
+    "lint:fix": "npm run lint:fix:backend && npm run lint:fix:frontend",
     "lint:backend": "cd apps/backend && npm run lint",
+    "lint:frontend": "cd apps/frontend && npm run lint",
     "lint:fix:backend": "cd apps/backend && npm run lint:fix",
+    "lint:fix:frontend": "cd apps/frontend && npm run lint:fix",
+    "type-check": "npm run type-check:backend && npm run type-check:frontend",
+    "type-check:backend": "cd apps/backend && npx tsc --noEmit",
+    "type-check:frontend": "cd apps/frontend && npm run type-check",
     "db:migrate": "cd packages/prisma && npx prisma migrate dev",
     "db:seed": "cd packages/prisma && npx prisma db seed",
     "db:reset": "cd packages/prisma && npx prisma migrate reset",
     "db:studio": "cd packages/prisma && npx prisma studio",
-    "clean": "npm run clean:backend && npm run clean:deps",
+    "clean": "npm run clean:backend && npm run clean:frontend && npm run clean:deps",
     "clean:backend": "cd apps/backend && rm -rf dist && rm -rf node_modules",
+    "clean:frontend": "cd apps/frontend && rm -rf dist && rm -rf node_modules",
     "clean:deps": "rm -rf node_modules",
-    "install:all": "npm install && npm run install:backend && npm run install:prisma",
+    "install:all": "npm install && npm run install:backend && npm run install:frontend && npm run install:prisma",
     "install:backend": "cd apps/backend && npm install",
+    "install:frontend": "cd apps/frontend && npm install",
     "install:prisma": "cd packages/prisma && npm install"
   },
   "devDependencies": {
@@ -40,7 +51,9 @@
     "husky": "^8.0.0",
     "lint-staged": "^15.0.0",
     "@commitlint/cli": "^18.0.0",
-    "@commitlint/config-conventional": "^18.0.0"
+    "@commitlint/config-conventional": "^18.0.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0"
   },
   "engines": {
     "node": ">=18.0.0",
@@ -48,5 +61,14 @@
   },
   "dependencies": {
     "@prisma/client": "^6.13.0"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   }
 }
