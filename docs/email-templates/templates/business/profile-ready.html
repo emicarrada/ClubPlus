@@ -1,243 +1,434 @@
 <!-- Profile Ready Template -->
 <h1 class="header-title accent-color">¡Tu perfil está listo! 🎉</h1>
 
-<p class="content-text">
-    ¡Excelentes noticias, <strong>{{user.firstName}}</strong>!
-</p>
+<p class="content-text">¡Excelentes noticias, <strong>{{user.firstName}}</strong>!</p>
 
 <p class="content-text">
-    Tu perfil de <strong>{{profile.type}}</strong> para <strong>{{profile.service}}</strong> ha sido configurado y está completamente listo para usar. Nuestro equipo ha terminado toda la configuración personalizada.
+  Tu perfil de <strong>{{profile.type}}</strong> para <strong>{{profile.service}}</strong> ha sido
+  configurado y está completamente listo para usar. Nuestro equipo ha terminado toda la
+  configuración personalizada.
 </p>
 
-<div style="background-color: #FFFBEB; border: 1px solid #F59E0B; border-radius: 8px; padding: 24px; margin: 32px 0; text-align: center;">
-    <h2 style="margin: 0 0 16px 0; color: #92400E; font-size: 24px;">🚀 ¡Todo configurado!</h2>
-    <p style="margin: 0 0 20px 0; font-size: 16px; color: #92400E;">
-        Tu perfil está optimizado y funcionando perfectamente
+<div
+  style="
+    background-color: #fffbeb;
+    border: 1px solid #f59e0b;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 32px 0;
+    text-align: center;
+  "
+>
+  <h2 style="margin: 0 0 16px 0; color: #92400e; font-size: 24px">🚀 ¡Todo configurado!</h2>
+  <p style="margin: 0 0 20px 0; font-size: 16px; color: #92400e">
+    Tu perfil está optimizado y funcionando perfectamente
+  </p>
+  <div style="background-color: #fef3c7; padding: 16px; border-radius: 6px; margin: 16px 0">
+    <p style="margin: 0; font-size: 14px; color: #92400e">
+      <strong>Tiempo de configuración:</strong> {{setup.duration}}<br />
+      <strong>Estado:</strong> <span style="color: #10b981">✓ Completado</span><br />
+      <strong>Configurado por:</strong> {{setup.technician}}
     </p>
-    <div style="background-color: #FEF3C7; padding: 16px; border-radius: 6px; margin: 16px 0;">
-        <p style="margin: 0; font-size: 14px; color: #92400E;">
-            <strong>Tiempo de configuración:</strong> {{setup.duration}}<br>
-            <strong>Estado:</strong> <span style="color: #10B981;">✓ Completado</span><br>
-            <strong>Configurado por:</strong> {{setup.technician}}
-        </p>
-    </div>
+  </div>
 </div>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 32px 0;">
-    <tr>
-        <td align="center">
-            <a href="https://clubplus.app/profiles/{{profile.id}}/dashboard?utm_source=email&utm_medium=email&utm_campaign=profile_ready&utm_content=access_button" 
-               class="btn" 
-               style="background-color: #F59E0B; text-decoration: none; color: #ffffff; font-size: 18px; padding: 16px 32px;">
-                🎯 Acceder a mi perfil
-            </a>
-        </td>
-    </tr>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 32px 0">
+  <tr>
+    <td align="center">
+      <a
+        href="https://clubplus.app/profiles/{{profile.id}}/dashboard?utm_source=email&utm_medium=email&utm_campaign=profile_ready&utm_content=access_button"
+        class="btn"
+        style="
+          background-color: #f59e0b;
+          text-decoration: none;
+          color: #ffffff;
+          font-size: 18px;
+          padding: 16px 32px;
+        "
+      >
+        🎯 Acceder a mi perfil
+      </a>
+    </td>
+  </tr>
 </table>
 
 <h3 class="section-title">✨ Lo que se configuró para ti:</h3>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="width: 50%; vertical-align: top; padding-right: 16px;">
-            <div style="background-color: #F0FDF4; padding: 20px; border-radius: 8px; border-left: 4px solid #10B981; margin-bottom: 16px;">
-                <h4 style="margin: 0 0 12px 0; color: #047857; font-size: 16px;">🎨 Personalización completa</h4>
-                <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #065F46;">
-                    <li style="margin-bottom: 6px;">Branding personalizado aplicado</li>
-                    <li style="margin-bottom: 6px;">Colores y estilo configurados</li>
-                    <li style="margin-bottom: 6px;">Contenido inicial optimizado</li>
-                    <li>SEO básico implementado</li>
-                </ul>
-            </div>
-        </td>
-        <td style="width: 50%; vertical-align: top; padding-left: 16px;">
-            <div style="background-color: #EFF6FF; padding: 20px; border-radius: 8px; border-left: 4px solid #3B82F6; margin-bottom: 16px;">
-                <h4 style="margin: 0 0 12px 0; color: #1E40AF; font-size: 16px;">⚙️ Configuración técnica</h4>
-                <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #1E3A8A;">
-                    <li style="margin-bottom: 6px;">Conexiones API establecidas</li>
-                    <li style="margin-bottom: 6px;">Integraciones activadas</li>
-                    <li style="margin-bottom: 6px;">Automatizaciones configuradas</li>
-                    <li>Monitoreo activado</li>
-                </ul>
-            </div>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td style="width: 50%; vertical-align: top; padding-right: 16px">
+      <div
+        style="
+          background-color: #f0fdf4;
+          padding: 20px;
+          border-radius: 8px;
+          border-left: 4px solid #10b981;
+          margin-bottom: 16px;
+        "
+      >
+        <h4 style="margin: 0 0 12px 0; color: #047857; font-size: 16px">
+          🎨 Personalización completa
+        </h4>
+        <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #065f46">
+          <li style="margin-bottom: 6px">Branding personalizado aplicado</li>
+          <li style="margin-bottom: 6px">Colores y estilo configurados</li>
+          <li style="margin-bottom: 6px">Contenido inicial optimizado</li>
+          <li>SEO básico implementado</li>
+        </ul>
+      </div>
+    </td>
+    <td style="width: 50%; vertical-align: top; padding-left: 16px">
+      <div
+        style="
+          background-color: #eff6ff;
+          padding: 20px;
+          border-radius: 8px;
+          border-left: 4px solid #3b82f6;
+          margin-bottom: 16px;
+        "
+      >
+        <h4 style="margin: 0 0 12px 0; color: #1e40af; font-size: 16px">
+          ⚙️ Configuración técnica
+        </h4>
+        <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #1e3a8a">
+          <li style="margin-bottom: 6px">Conexiones API establecidas</li>
+          <li style="margin-bottom: 6px">Integraciones activadas</li>
+          <li style="margin-bottom: 6px">Automatizaciones configuradas</li>
+          <li>Monitoreo activado</li>
+        </ul>
+      </div>
+    </td>
+  </tr>
 </table>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="width: 50%; vertical-align: top; padding-right: 16px;">
-            <div style="background-color: #FEF7FF; padding: 20px; border-radius: 8px; border-left: 4px solid #9333EA; margin-bottom: 16px;">
-                <h4 style="margin: 0 0 12px 0; color: #7C2D92; font-size: 16px;">📊 Analytics configurado</h4>
-                <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #7C2D92;">
-                    <li style="margin-bottom: 6px;">Tracking de métricas activado</li>
-                    <li style="margin-bottom: 6px;">Dashboards personalizados</li>
-                    <li style="margin-bottom: 6px;">Reportes automáticos</li>
-                    <li>Alertas configuradas</li>
-                </ul>
-            </div>
-        </td>
-        <td style="width: 50%; vertical-align: top; padding-left: 16px;">
-            <div style="background-color: #FEF2F2; padding: 20px; border-radius: 8px; border-left: 4px solid #EF4444;">
-                <h4 style="margin: 0 0 12px 0; color: #DC2626; font-size: 16px;">🛡️ Seguridad implementada</h4>
-                <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #991B1B;">
-                    <li style="margin-bottom: 6px;">Protección anti-spam activa</li>
-                    <li style="margin-bottom: 6px;">Backups automáticos</li>
-                    <li style="margin-bottom: 6px;">SSL certificado instalado</li>
-                    <li>Monitoreo de seguridad 24/7</li>
-                </ul>
-            </div>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td style="width: 50%; vertical-align: top; padding-right: 16px">
+      <div
+        style="
+          background-color: #fef7ff;
+          padding: 20px;
+          border-radius: 8px;
+          border-left: 4px solid #9333ea;
+          margin-bottom: 16px;
+        "
+      >
+        <h4 style="margin: 0 0 12px 0; color: #7c2d92; font-size: 16px">
+          📊 Analytics configurado
+        </h4>
+        <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #7c2d92">
+          <li style="margin-bottom: 6px">Tracking de métricas activado</li>
+          <li style="margin-bottom: 6px">Dashboards personalizados</li>
+          <li style="margin-bottom: 6px">Reportes automáticos</li>
+          <li>Alertas configuradas</li>
+        </ul>
+      </div>
+    </td>
+    <td style="width: 50%; vertical-align: top; padding-left: 16px">
+      <div
+        style="
+          background-color: #fef2f2;
+          padding: 20px;
+          border-radius: 8px;
+          border-left: 4px solid #ef4444;
+        "
+      >
+        <h4 style="margin: 0 0 12px 0; color: #dc2626; font-size: 16px">
+          🛡️ Seguridad implementada
+        </h4>
+        <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #991b1b">
+          <li style="margin-bottom: 6px">Protección anti-spam activa</li>
+          <li style="margin-bottom: 6px">Backups automáticos</li>
+          <li style="margin-bottom: 6px">SSL certificado instalado</li>
+          <li>Monitoreo de seguridad 24/7</li>
+        </ul>
+      </div>
+    </td>
+  </tr>
 </table>
 
-<div style="background-color: #F0F9FF; border-left: 4px solid #3B82F6; padding: 24px; margin: 32px 0;">
-    <h3 style="margin: 0 0 16px 0; color: #1E40AF; font-size: 18px;">📈 Primeros pasos recomendados:</h3>
-    
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-        <tr>
-            <td style="width: 60px; vertical-align: top;">
-                <div style="width: 40px; height: 40px; background-color: #3B82F6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px; text-align: center; line-height: 40px;">1</div>
-            </td>
-            <td style="vertical-align: top; padding-left: 16px;">
-                <h4 style="margin: 0 0 8px 0; color: #1E40AF; font-size: 16px;">Explora tu dashboard</h4>
-                <p style="margin: 0; font-size: 14px; color: #1E3A8A;">
-                    Familiarízate con las herramientas y funciones disponibles en tu perfil
-                </p>
-            </td>
-        </tr>
-    </table>
-    
-    <div style="margin: 20px 0;"></div>
-    
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-        <tr>
-            <td style="width: 60px; vertical-align: top;">
-                <div style="width: 40px; height: 40px; background-color: #10B981; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px; text-align: center; line-height: 40px;">2</div>
-            </td>
-            <td style="vertical-align: top; padding-left: 16px;">
-                <h4 style="margin: 0 0 8px 0; color: #047857; font-size: 16px;">Personaliza tu contenido</h4>
-                <p style="margin: 0; font-size: 14px; color: #065F46;">
-                    Ajusta la información y el contenido según tus necesidades específicas
-                </p>
-            </td>
-        </tr>
-    </table>
-    
-    <div style="margin: 20px 0;"></div>
-    
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-        <tr>
-            <td style="width: 60px; vertical-align: top;">
-                <div style="width: 40px; height: 40px; background-color: #F59E0B; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 18px; text-align: center; line-height: 40px;">3</div>
-            </td>
-            <td style="vertical-align: top; padding-left: 16px;">
-                <h4 style="margin: 0 0 8px 0; color: #92400E; font-size: 16px;">Revisa tus métricas</h4>
-                <p style="margin: 0; font-size: 14px; color: #92400E;">
-                    Monitorea el rendimiento inicial y ajusta según sea necesario
-                </p>
-            </td>
-        </tr>
-    </table>
+<div
+  style="background-color: #f0f9ff; border-left: 4px solid #3b82f6; padding: 24px; margin: 32px 0"
+>
+  <h3 style="margin: 0 0 16px 0; color: #1e40af; font-size: 18px">
+    📈 Primeros pasos recomendados:
+  </h3>
+
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+      <td style="width: 60px; vertical-align: top">
+        <div
+          style="
+            width: 40px;
+            height: 40px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            line-height: 40px;
+          "
+        >
+          1
+        </div>
+      </td>
+      <td style="vertical-align: top; padding-left: 16px">
+        <h4 style="margin: 0 0 8px 0; color: #1e40af; font-size: 16px">Explora tu dashboard</h4>
+        <p style="margin: 0; font-size: 14px; color: #1e3a8a">
+          Familiarízate con las herramientas y funciones disponibles en tu perfil
+        </p>
+      </td>
+    </tr>
+  </table>
+
+  <div style="margin: 20px 0"></div>
+
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+      <td style="width: 60px; vertical-align: top">
+        <div
+          style="
+            width: 40px;
+            height: 40px;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            line-height: 40px;
+          "
+        >
+          2
+        </div>
+      </td>
+      <td style="vertical-align: top; padding-left: 16px">
+        <h4 style="margin: 0 0 8px 0; color: #047857; font-size: 16px">Personaliza tu contenido</h4>
+        <p style="margin: 0; font-size: 14px; color: #065f46">
+          Ajusta la información y el contenido según tus necesidades específicas
+        </p>
+      </td>
+    </tr>
+  </table>
+
+  <div style="margin: 20px 0"></div>
+
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+      <td style="width: 60px; vertical-align: top">
+        <div
+          style="
+            width: 40px;
+            height: 40px;
+            background-color: #f59e0b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            line-height: 40px;
+          "
+        >
+          3
+        </div>
+      </td>
+      <td style="vertical-align: top; padding-left: 16px">
+        <h4 style="margin: 0 0 8px 0; color: #92400e; font-size: 16px">Revisa tus métricas</h4>
+        <p style="margin: 0; font-size: 14px; color: #92400e">
+          Monitorea el rendimiento inicial y ajusta según sea necesario
+        </p>
+      </td>
+    </tr>
+  </table>
 </div>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 32px 0;">
-    <tr>
-        <td align="center" style="padding: 0 20px;">
-            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
-                <tr>
-                    <td style="padding: 0 10px;">
-                        <a href="https://clubplus.app/tutorials/{{profile.type}}?utm_source=email&utm_medium=email&utm_campaign=profile_ready&utm_content=tutorial_button" 
-                           class="btn-outline" 
-                           style="display: inline-block; padding: 12px 24px; background-color: transparent; color: #3B82F6; text-decoration: none; border: 2px solid #3B82F6; border-radius: 6px; font-size: 14px;">
-                            📚 Ver tutorial
-                        </a>
-                    </td>
-                    <td style="padding: 0 10px;">
-                        <a href="https://clubplus.app/profiles/{{profile.id}}/settings?utm_source=email&utm_medium=email&utm_campaign=profile_ready&utm_content=customize_button" 
-                           class="btn-outline" 
-                           style="display: inline-block; padding: 12px 24px; background-color: transparent; color: #10B981; text-decoration: none; border: 2px solid #10B981; border-radius: 6px; font-size: 14px;">
-                            ⚙️ Personalizar
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 32px 0"
+>
+  <tr>
+    <td align="center" style="padding: 0 20px">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td style="padding: 0 10px">
+            <a
+              href="https://clubplus.app/tutorials/{{profile.type}}?utm_source=email&utm_medium=email&utm_campaign=profile_ready&utm_content=tutorial_button"
+              class="btn-outline"
+              style="
+                display: inline-block;
+                padding: 12px 24px;
+                background-color: transparent;
+                color: #3b82f6;
+                text-decoration: none;
+                border: 2px solid #3b82f6;
+                border-radius: 6px;
+                font-size: 14px;
+              "
+            >
+              📚 Ver tutorial
+            </a>
+          </td>
+          <td style="padding: 0 10px">
+            <a
+              href="https://clubplus.app/profiles/{{profile.id}}/settings?utm_source=email&utm_medium=email&utm_campaign=profile_ready&utm_content=customize_button"
+              class="btn-outline"
+              style="
+                display: inline-block;
+                padding: 12px 24px;
+                background-color: transparent;
+                color: #10b981;
+                text-decoration: none;
+                border: 2px solid #10b981;
+                border-radius: 6px;
+                font-size: 14px;
+              "
+            >
+              ⚙️ Personalizar
+            </a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 </table>
 
-<div style="background-color: #ECFDF5; border: 1px solid #10B981; border-radius: 8px; padding: 20px; margin: 32px 0;">
-    <h4 style="margin: 0 0 12px 0; color: #047857; font-size: 16px;">🎁 Bonus de lanzamiento</h4>
-    <p style="margin: 0 0 12px 0; font-size: 14px; color: #065F46;">
-        Como agradecimiento por elegir Club+, hemos incluido algunos extras en tu perfil:
-    </p>
-    <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #065F46;">
-        <li style="margin-bottom: 6px;">✨ <strong>30 días de soporte premium gratis</strong></li>
-        <li style="margin-bottom: 6px;">📊 <strong>Reporte de rendimiento mensual</strong></li>
-        <li style="margin-bottom: 6px;">🔧 <strong>1 personalización adicional sin costo</strong></li>
-        <li>📞 <strong>Consulta estratégica de 30 minutos</strong></li>
-    </ul>
+<div
+  style="
+    background-color: #ecfdf5;
+    border: 1px solid #10b981;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 32px 0;
+  "
+>
+  <h4 style="margin: 0 0 12px 0; color: #047857; font-size: 16px">🎁 Bonus de lanzamiento</h4>
+  <p style="margin: 0 0 12px 0; font-size: 14px; color: #065f46">
+    Como agradecimiento por elegir Club+, hemos incluido algunos extras en tu perfil:
+  </p>
+  <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #065f46">
+    <li style="margin-bottom: 6px">✨ <strong>30 días de soporte premium gratis</strong></li>
+    <li style="margin-bottom: 6px">📊 <strong>Reporte de rendimiento mensual</strong></li>
+    <li style="margin-bottom: 6px">🔧 <strong>1 personalización adicional sin costo</strong></li>
+    <li>📞 <strong>Consulta estratégica de 30 minutos</strong></li>
+  </ul>
 </div>
 
 <h3 class="section-title">Datos de acceso y recursos:</h3>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #F9FAFB; border-radius: 8px; padding: 20px; margin: 20px 0;">
-    <tr>
-        <td style="width: 50%; vertical-align: top; padding-right: 16px;">
-            <h4 style="margin: 0 0 12px 0; color: #1F2937; font-size: 16px;">🔗 Enlaces importantes:</h4>
-            <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #4B5563;">
-                <li style="margin-bottom: 8px;">
-                    <a href="https://clubplus.app/profiles/{{profile.id}}" style="color: #3B82F6; text-decoration: none;">Tu perfil público</a>
-                </li>
-                <li style="margin-bottom: 8px;">
-                    <a href="https://clubplus.app/profiles/{{profile.id}}/dashboard" style="color: #3B82F6; text-decoration: none;">Panel de control</a>
-                </li>
-                <li style="margin-bottom: 8px;">
-                    <a href="https://clubplus.app/profiles/{{profile.id}}/analytics" style="color: #3B82F6; text-decoration: none;">Analytics y métricas</a>
-                </li>
-                <li>
-                    <a href="https://clubplus.app/profiles/{{profile.id}}/settings" style="color: #3B82F6; text-decoration: none;">Configuración</a>
-                </li>
-            </ul>
-        </td>
-        <td style="width: 50%; vertical-align: top; padding-left: 16px;">
-            <h4 style="margin: 0 0 12px 0; color: #1F2937; font-size: 16px;">📞 Soporte disponible:</h4>
-            <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #4B5563;">
-                <li style="margin-bottom: 8px;">💬 Chat en vivo 24/7</li>
-                <li style="margin-bottom: 8px;">📧 support@clubplus.app</li>
-                <li style="margin-bottom: 8px;">📚 Centro de ayuda</li>
-                <li>🎥 Video tutoriales</li>
-            </ul>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin: 20px 0"
+>
+  <tr>
+    <td style="width: 50%; vertical-align: top; padding-right: 16px">
+      <h4 style="margin: 0 0 12px 0; color: #1f2937; font-size: 16px">🔗 Enlaces importantes:</h4>
+      <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #4b5563">
+        <li style="margin-bottom: 8px">
+          <a
+            href="https://clubplus.app/profiles/{{profile.id}}"
+            style="color: #3b82f6; text-decoration: none"
+            >Tu perfil público</a
+          >
+        </li>
+        <li style="margin-bottom: 8px">
+          <a
+            href="https://clubplus.app/profiles/{{profile.id}}/dashboard"
+            style="color: #3b82f6; text-decoration: none"
+            >Panel de control</a
+          >
+        </li>
+        <li style="margin-bottom: 8px">
+          <a
+            href="https://clubplus.app/profiles/{{profile.id}}/analytics"
+            style="color: #3b82f6; text-decoration: none"
+            >Analytics y métricas</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://clubplus.app/profiles/{{profile.id}}/settings"
+            style="color: #3b82f6; text-decoration: none"
+            >Configuración</a
+          >
+        </li>
+      </ul>
+    </td>
+    <td style="width: 50%; vertical-align: top; padding-left: 16px">
+      <h4 style="margin: 0 0 12px 0; color: #1f2937; font-size: 16px">📞 Soporte disponible:</h4>
+      <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #4b5563">
+        <li style="margin-bottom: 8px">💬 Chat en vivo 24/7</li>
+        <li style="margin-bottom: 8px">📧 support@clubplus.app</li>
+        <li style="margin-bottom: 8px">📚 Centro de ayuda</li>
+        <li>🎥 Video tutoriales</li>
+      </ul>
+    </td>
+  </tr>
 </table>
 
 <p class="content-text">
-    Tu perfil está ahora completamente operativo y optimizado. Nuestro equipo ha trabajado para asegurar que tengas la mejor configuración posible desde el primer día.
+  Tu perfil está ahora completamente operativo y optimizado. Nuestro equipo ha trabajado para
+  asegurar que tengas la mejor configuración posible desde el primer día.
 </p>
 
 <p class="content-text">
-    Si tienes alguna pregunta sobre tu perfil o quieres hacer algún ajuste adicional, no dudes en contactarnos. Estamos aquí para asegurar tu éxito.
+  Si tienes alguna pregunta sobre tu perfil o quieres hacer algún ajuste adicional, no dudes en
+  contactarnos. Estamos aquí para asegurar tu éxito.
 </p>
+
+<p class="content-text">¡Esperamos ver los excelentes resultados que lograrás!</p>
 
 <p class="content-text">
-    ¡Esperamos ver los excelentes resultados que lograrás!
+  Mucho éxito,<br />
+  <strong>{{setup.technician}} y todo el equipo de Club+</strong>
 </p>
 
-<p class="content-text">
-    Mucho éxito,<br>
-    <strong>{{setup.technician}} y todo el equipo de Club+</strong>
+<hr style="border: none; border-top: 1px solid #e5e7eb; margin: 32px 0" />
+
+<p class="small-text" style="text-align: center">
+  Tu perfil {{profile.type}} fue configurado exitosamente el {{setup.date}}.<br />
+  ID del perfil: {{profile.id}} | Configurado por: {{setup.technician}}
 </p>
 
-<hr style="border: none; border-top: 1px solid #E5E7EB; margin: 32px 0;">
-
-<p class="small-text" style="text-align: center;">
-    Tu perfil {{profile.type}} fue configurado exitosamente el {{setup.date}}.<br>
-    ID del perfil: {{profile.id}} | Configurado por: {{setup.technician}}
-</p>
-
-<p class="small-text" style="text-align: center;">
-    <a href="https://clubplus.app/profiles/{{profile.id}}/dashboard" style="color: #3B82F6; text-decoration: none;">Acceder al dashboard</a>
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-    <a href="https://clubplus.app/support" style="color: #3B82F6; text-decoration: none;">Contactar soporte</a>
+<p class="small-text" style="text-align: center">
+  <a
+    href="https://clubplus.app/profiles/{{profile.id}}/dashboard"
+    style="color: #3b82f6; text-decoration: none"
+    >Acceder al dashboard</a
+  >
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="https://clubplus.app/support" style="color: #3b82f6; text-decoration: none"
+    >Contactar soporte</a
+  >
 </p>

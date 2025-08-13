@@ -1,252 +1,452 @@
 <!-- Support Ticket Created Template -->
 <h1 class="header-title primary-color">Ticket de soporte creado 🎫</h1>
 
-<p class="content-text">
-    Hola <strong>{{user.firstName}}</strong>,
-</p>
+<p class="content-text">Hola <strong>{{user.firstName}}</strong>,</p>
 
 <p class="content-text">
-    Hemos recibido tu solicitud de soporte y hemos creado un ticket para dar seguimiento a tu consulta. Nuestro equipo está revisando tu caso y te responderemos lo antes posible.
+  Hemos recibido tu solicitud de soporte y hemos creado un ticket para dar seguimiento a tu
+  consulta. Nuestro equipo está revisando tu caso y te responderemos lo antes posible.
 </p>
 
-<div style="background-color: #EFF6FF; border: 1px solid #3B82F6; border-radius: 8px; padding: 24px; margin: 32px 0;">
-    <h3 style="margin: 0 0 20px 0; color: #1E40AF; font-size: 18px; text-align: center;">📋 Información de tu ticket</h3>
-    
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-        <tr>
-            <td style="width: 30%; padding: 12px 0; border-bottom: 1px solid #DBEAFE; font-size: 14px; color: #1E40AF;">
-                <strong>Número de ticket:</strong>
-            </td>
-            <td style="width: 70%; padding: 12px 0; border-bottom: 1px solid #DBEAFE; font-size: 14px; color: #1E3A8A;">
-                <code style="background-color: #F0F9FF; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 13px; color: #1E40AF;">#{{ticket.id}}</code>
-            </td>
-        </tr>
-        <tr>
-            <td style="padding: 12px 0; border-bottom: 1px solid #DBEAFE; font-size: 14px; color: #1E40AF;">
-                <strong>Fecha de creación:</strong>
-            </td>
-            <td style="padding: 12px 0; border-bottom: 1px solid #DBEAFE; font-size: 14px; color: #1E3A8A;">
-                {{ticket.created_date}}
-            </td>
-        </tr>
-        <tr>
-            <td style="padding: 12px 0; border-bottom: 1px solid #DBEAFE; font-size: 14px; color: #1E40AF;">
-                <strong>Categoría:</strong>
-            </td>
-            <td style="padding: 12px 0; border-bottom: 1px solid #DBEAFE; font-size: 14px; color: #1E3A8A;">
-                {{ticket.category}}
-            </td>
-        </tr>
-        <tr>
-            <td style="padding: 12px 0; border-bottom: 1px solid #DBEAFE; font-size: 14px; color: #1E40AF;">
-                <strong>Prioridad:</strong>
-            </td>
-            <td style="padding: 12px 0; border-bottom: 1px solid #DBEAFE; font-size: 14px; color: #1E3A8A;">
-                <span style="background-color: {{ticket.priority_color}}; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; text-transform: uppercase;">
-                    {{ticket.priority}}
-                </span>
-            </td>
-        </tr>
-        <tr>
-            <td style="padding: 12px 0; border-bottom: 1px solid #DBEAFE; font-size: 14px; color: #1E40AF;">
-                <strong>Tiempo de respuesta estimado:</strong>
-            </td>
-            <td style="padding: 12px 0; border-bottom: 1px solid #DBEAFE; font-size: 14px; color: #1E3A8A;">
-                {{ticket.response_time}}
-            </td>
-        </tr>
-        <tr>
-            <td style="padding: 12px 0; font-size: 14px; color: #1E40AF;">
-                <strong>Agente asignado:</strong>
-            </td>
-            <td style="padding: 12px 0; font-size: 14px; color: #1E3A8A;">
-                {{agent.name}} ({{agent.specialization}})
-            </td>
-        </tr>
-    </table>
+<div
+  style="
+    background-color: #eff6ff;
+    border: 1px solid #3b82f6;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 32px 0;
+  "
+>
+  <h3 style="margin: 0 0 20px 0; color: #1e40af; font-size: 18px; text-align: center">
+    📋 Información de tu ticket
+  </h3>
+
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+      <td
+        style="
+          width: 30%;
+          padding: 12px 0;
+          border-bottom: 1px solid #dbeafe;
+          font-size: 14px;
+          color: #1e40af;
+        "
+      >
+        <strong>Número de ticket:</strong>
+      </td>
+      <td
+        style="
+          width: 70%;
+          padding: 12px 0;
+          border-bottom: 1px solid #dbeafe;
+          font-size: 14px;
+          color: #1e3a8a;
+        "
+      >
+        <code
+          style="
+            background-color: #f0f9ff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #1e40af;
+          "
+          >#{{ticket.id}}</code
+        >
+      </td>
+    </tr>
+    <tr>
+      <td
+        style="padding: 12px 0; border-bottom: 1px solid #dbeafe; font-size: 14px; color: #1e40af"
+      >
+        <strong>Fecha de creación:</strong>
+      </td>
+      <td
+        style="padding: 12px 0; border-bottom: 1px solid #dbeafe; font-size: 14px; color: #1e3a8a"
+      >
+        {{ticket.created_date}}
+      </td>
+    </tr>
+    <tr>
+      <td
+        style="padding: 12px 0; border-bottom: 1px solid #dbeafe; font-size: 14px; color: #1e40af"
+      >
+        <strong>Categoría:</strong>
+      </td>
+      <td
+        style="padding: 12px 0; border-bottom: 1px solid #dbeafe; font-size: 14px; color: #1e3a8a"
+      >
+        {{ticket.category}}
+      </td>
+    </tr>
+    <tr>
+      <td
+        style="padding: 12px 0; border-bottom: 1px solid #dbeafe; font-size: 14px; color: #1e40af"
+      >
+        <strong>Prioridad:</strong>
+      </td>
+      <td
+        style="padding: 12px 0; border-bottom: 1px solid #dbeafe; font-size: 14px; color: #1e3a8a"
+      >
+        <span
+          style="background-color: {{ticket.priority_color}}; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; text-transform: uppercase;"
+        >
+          {{ticket.priority}}
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td
+        style="padding: 12px 0; border-bottom: 1px solid #dbeafe; font-size: 14px; color: #1e40af"
+      >
+        <strong>Tiempo de respuesta estimado:</strong>
+      </td>
+      <td
+        style="padding: 12px 0; border-bottom: 1px solid #dbeafe; font-size: 14px; color: #1e3a8a"
+      >
+        {{ticket.response_time}}
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 12px 0; font-size: 14px; color: #1e40af">
+        <strong>Agente asignado:</strong>
+      </td>
+      <td style="padding: 12px 0; font-size: 14px; color: #1e3a8a">
+        {{agent.name}} ({{agent.specialization}})
+      </td>
+    </tr>
+  </table>
 </div>
 
 <h3 class="section-title">Tu consulta:</h3>
 
-<div style="background-color: #F9FAFB; border-left: 4px solid #6B7280; padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0;">
-    <h4 style="margin: 0 0 8px 0; color: #1F2937; font-size: 16px;">{{ticket.subject}}</h4>
-    <p style="margin: 0; font-size: 14px; color: #4B5563; line-height: 1.6;">
-        {{ticket.description}}
-    </p>
+<div
+  style="
+    background-color: #f9fafb;
+    border-left: 4px solid #6b7280;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+  "
+>
+  <h4 style="margin: 0 0 8px 0; color: #1f2937; font-size: 16px">{{ticket.subject}}</h4>
+  <p style="margin: 0; font-size: 14px; color: #4b5563; line-height: 1.6">{{ticket.description}}</p>
 </div>
 
-<div style="background-color: #F0FDF4; border: 1px solid #10B981; border-radius: 8px; padding: 20px; margin: 32px 0;">
-    <h4 style="margin: 0 0 12px 0; color: #047857; font-size: 16px;">⏱️ ¿Cuándo recibirás respuesta?</h4>
-    
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-        <tr>
-            <td style="width: 50%; vertical-align: top; padding-right: 16px;">
-                <div style="text-align: center; padding: 16px; background-color: #ECFDF5; border-radius: 6px;">
-                    <div style="font-size: 24px; font-weight: bold; color: #047857; margin-bottom: 4px;">{{ticket.response_time}}</div>
-                    <div style="font-size: 12px; color: #065F46; text-transform: uppercase; letter-spacing: 1px;">Primera respuesta</div>
-                </div>
-            </td>
-            <td style="width: 50%; vertical-align: top; padding-left: 16px;">
-                <div style="text-align: center; padding: 16px; background-color: #ECFDF5; border-radius: 6px;">
-                    <div style="font-size: 24px; font-weight: bold; color: #047857; margin-bottom: 4px;">{{ticket.resolution_time}}</div>
-                    <div style="font-size: 12px; color: #065F46; text-transform: uppercase; letter-spacing: 1px;">Resolución estimada</div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    
-    <p style="margin: 16px 0 0 0; font-size: 14px; color: #065F46; text-align: center;">
-        * Los tiempos pueden variar según la complejidad del caso
-    </p>
-</div>
+<div
+  style="
+    background-color: #f0fdf4;
+    border: 1px solid #10b981;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 32px 0;
+  "
+>
+  <h4 style="margin: 0 0 12px 0; color: #047857; font-size: 16px">
+    ⏱️ ¿Cuándo recibirás respuesta?
+  </h4>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 32px 0;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
     <tr>
-        <td align="center">
-            <a href="https://clubplus.app/support/ticket/{{ticket.id}}?utm_source=email&utm_medium=email&utm_campaign=support&utm_content=view_ticket_button" 
-               class="btn" 
-               style="background-color: #3B82F6; text-decoration: none; color: #ffffff;">
-                Ver estado del ticket
-            </a>
-        </td>
+      <td style="width: 50%; vertical-align: top; padding-right: 16px">
+        <div
+          style="text-align: center; padding: 16px; background-color: #ecfdf5; border-radius: 6px"
+        >
+          <div style="font-size: 24px; font-weight: bold; color: #047857; margin-bottom: 4px">
+            {{ticket.response_time}}
+          </div>
+          <div
+            style="font-size: 12px; color: #065f46; text-transform: uppercase; letter-spacing: 1px"
+          >
+            Primera respuesta
+          </div>
+        </div>
+      </td>
+      <td style="width: 50%; vertical-align: top; padding-left: 16px">
+        <div
+          style="text-align: center; padding: 16px; background-color: #ecfdf5; border-radius: 6px"
+        >
+          <div style="font-size: 24px; font-weight: bold; color: #047857; margin-bottom: 4px">
+            {{ticket.resolution_time}}
+          </div>
+          <div
+            style="font-size: 12px; color: #065f46; text-transform: uppercase; letter-spacing: 1px"
+          >
+            Resolución estimada
+          </div>
+        </div>
+      </td>
     </tr>
+  </table>
+
+  <p style="margin: 16px 0 0 0; font-size: 14px; color: #065f46; text-align: center">
+    * Los tiempos pueden variar según la complejidad del caso
+  </p>
+</div>
+
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 32px 0">
+  <tr>
+    <td align="center">
+      <a
+        href="https://clubplus.app/support/ticket/{{ticket.id}}?utm_source=email&utm_medium=email&utm_campaign=support&utm_content=view_ticket_button"
+        class="btn"
+        style="background-color: #3b82f6; text-decoration: none; color: #ffffff"
+      >
+        Ver estado del ticket
+      </a>
+    </td>
+  </tr>
 </table>
 
 <h3 class="section-title">Mientras esperás nuestra respuesta:</h3>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="padding: 16px; background-color: #FFFBEB; border-radius: 8px; border-left: 4px solid #F59E0B; margin-bottom: 16px;">
-            <h4 style="margin: 0 0 8px 0; color: #92400E; font-size: 16px;">📚 Consulta nuestro centro de ayuda</h4>
-            <p style="margin: 0 0 8px 0; font-size: 14px; color: #92400E;">
-                Quizás encuentres una solución rápida en nuestros artículos de ayuda
-            </p>
-            <a href="https://clubplus.app/help?search={{ticket.category}}" style="color: #3B82F6; text-decoration: none; font-size: 14px;">
-                🔍 Buscar soluciones relacionadas →
-            </a>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td
+      style="
+        padding: 16px;
+        background-color: #fffbeb;
+        border-radius: 8px;
+        border-left: 4px solid #f59e0b;
+        margin-bottom: 16px;
+      "
+    >
+      <h4 style="margin: 0 0 8px 0; color: #92400e; font-size: 16px">
+        📚 Consulta nuestro centro de ayuda
+      </h4>
+      <p style="margin: 0 0 8px 0; font-size: 14px; color: #92400e">
+        Quizás encuentres una solución rápida en nuestros artículos de ayuda
+      </p>
+      <a
+        href="https://clubplus.app/help?search={{ticket.category}}"
+        style="color: #3b82f6; text-decoration: none; font-size: 14px"
+      >
+        🔍 Buscar soluciones relacionadas →
+      </a>
+    </td>
+  </tr>
 </table>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="padding: 16px; background-color: #FEF2F2; border-radius: 8px; border-left: 4px solid #EF4444; margin-bottom: 16px;">
-            <h4 style="margin: 0 0 8px 0; color: #DC2626; font-size: 16px;">🚨 ¿Es urgente?</h4>
-            <p style="margin: 0 0 8px 0; font-size: 14px; color: #991B1B;">
-                Si tu consulta afecta servicios críticos o necesitas ayuda inmediata
-            </p>
-            <a href="https://clubplus.app/support/urgent" style="color: #EF4444; text-decoration: none; font-size: 14px;">
-                ⚡ Marcar como urgente →
-            </a>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td
+      style="
+        padding: 16px;
+        background-color: #fef2f2;
+        border-radius: 8px;
+        border-left: 4px solid #ef4444;
+        margin-bottom: 16px;
+      "
+    >
+      <h4 style="margin: 0 0 8px 0; color: #dc2626; font-size: 16px">🚨 ¿Es urgente?</h4>
+      <p style="margin: 0 0 8px 0; font-size: 14px; color: #991b1b">
+        Si tu consulta afecta servicios críticos o necesitas ayuda inmediata
+      </p>
+      <a
+        href="https://clubplus.app/support/urgent"
+        style="color: #ef4444; text-decoration: none; font-size: 14px"
+      >
+        ⚡ Marcar como urgente →
+      </a>
+    </td>
+  </tr>
 </table>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="padding: 16px; background-color: #F3F4F6; border-radius: 8px; border-left: 4px solid #6B7280;">
-            <h4 style="margin: 0 0 8px 0; color: #374151; font-size: 16px;">💬 Agregar información</h4>
-            <p style="margin: 0 0 8px 0; font-size: 14px; color: #4B5563;">
-                ¿Recordaste algo más? Puedes añadir detalles a tu ticket
-            </p>
-            <a href="https://clubplus.app/support/ticket/{{ticket.id}}/update" style="color: #3B82F6; text-decoration: none; font-size: 14px;">
-                ✏️ Actualizar ticket →
-            </a>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td
+      style="
+        padding: 16px;
+        background-color: #f3f4f6;
+        border-radius: 8px;
+        border-left: 4px solid #6b7280;
+      "
+    >
+      <h4 style="margin: 0 0 8px 0; color: #374151; font-size: 16px">💬 Agregar información</h4>
+      <p style="margin: 0 0 8px 0; font-size: 14px; color: #4b5563">
+        ¿Recordaste algo más? Puedes añadir detalles a tu ticket
+      </p>
+      <a
+        href="https://clubplus.app/support/ticket/{{ticket.id}}/update"
+        style="color: #3b82f6; text-decoration: none; font-size: 14px"
+      >
+        ✏️ Actualizar ticket →
+      </a>
+    </td>
+  </tr>
 </table>
 
-<div style="background-color: #F0F9FF; border-left: 4px solid #3B82F6; padding: 20px; margin: 32px 0;">
-    <h4 style="margin: 0 0 12px 0; color: #1E40AF; font-size: 16px;">💡 Consejos para una resolución más rápida:</h4>
-    <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #1E3A8A;">
-        <li style="margin-bottom: 8px;">Mantén este email para futuras referencias</li>
-        <li style="margin-bottom: 8px;">Responde con información adicional si es necesaria</li>
-        <li style="margin-bottom: 8px;">Revisa tu email regularmente para actualizaciones</li>
-        <li style="margin-bottom: 8px;">Usa el número de ticket #{{ticket.id}} en todas las comunicaciones</li>
-        <li>Si el problema se resuelve, no olvides cerrar el ticket</li>
-    </ul>
+<div
+  style="background-color: #f0f9ff; border-left: 4px solid #3b82f6; padding: 20px; margin: 32px 0"
+>
+  <h4 style="margin: 0 0 12px 0; color: #1e40af; font-size: 16px">
+    💡 Consejos para una resolución más rápida:
+  </h4>
+  <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #1e3a8a">
+    <li style="margin-bottom: 8px">Mantén este email para futuras referencias</li>
+    <li style="margin-bottom: 8px">Responde con información adicional si es necesaria</li>
+    <li style="margin-bottom: 8px">Revisa tu email regularmente para actualizaciones</li>
+    <li style="margin-bottom: 8px">
+      Usa el número de ticket #{{ticket.id}} en todas las comunicaciones
+    </li>
+    <li>Si el problema se resuelve, no olvides cerrar el ticket</li>
+  </ul>
 </div>
 
 <h3 class="section-title">Información de contacto:</h3>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #F9FAFB; border-radius: 8px; padding: 20px; margin: 20px 0;">
-    <tr>
-        <td style="width: 50%; vertical-align: top; padding-right: 16px;">
-            <h4 style="margin: 0 0 12px 0; color: #1F2937; font-size: 16px;">🎧 Tu agente de soporte:</h4>
-            <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                <img src="{{agent.avatar}}" alt="{{agent.name}}" width="40" height="40" style="border-radius: 50%; margin-right: 12px;">
-                <div>
-                    <div style="font-weight: bold; color: #1F2937; font-size: 14px;">{{agent.name}}</div>
-                    <div style="color: #6B7280; font-size: 12px;">{{agent.specialization}}</div>
-                </div>
-            </div>
-            <p style="margin: 0; font-size: 14px; color: #4B5563;">
-                📧 {{agent.email}}<br>
-                ⏰ Disponible {{agent.schedule}}
-            </p>
-        </td>
-        <td style="width: 50%; vertical-align: top; padding-left: 16px;">
-            <h4 style="margin: 0 0 12px 0; color: #1F2937; font-size: 16px;">📞 Otros canales:</h4>
-            <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #4B5563;">
-                <li style="margin-bottom: 8px;">💬 Chat en vivo (24/7)</li>
-                <li style="margin-bottom: 8px;">📧 support@clubplus.app</li>
-                <li style="margin-bottom: 8px;">📱 WhatsApp: +1 (555) 123-4567</li>
-                <li>🌐 Portal de soporte</li>
-            </ul>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin: 20px 0"
+>
+  <tr>
+    <td style="width: 50%; vertical-align: top; padding-right: 16px">
+      <h4 style="margin: 0 0 12px 0; color: #1f2937; font-size: 16px">🎧 Tu agente de soporte:</h4>
+      <div style="display: flex; align-items: center; margin-bottom: 12px">
+        <img
+          src="{{agent.avatar}}"
+          alt="{{agent.name}}"
+          width="40"
+          height="40"
+          style="border-radius: 50%; margin-right: 12px"
+        />
+        <div>
+          <div style="font-weight: bold; color: #1f2937; font-size: 14px">{{agent.name}}</div>
+          <div style="color: #6b7280; font-size: 12px">{{agent.specialization}}</div>
+        </div>
+      </div>
+      <p style="margin: 0; font-size: 14px; color: #4b5563">
+        📧 {{agent.email}}<br />
+        ⏰ Disponible {{agent.schedule}}
+      </p>
+    </td>
+    <td style="width: 50%; vertical-align: top; padding-left: 16px">
+      <h4 style="margin: 0 0 12px 0; color: #1f2937; font-size: 16px">📞 Otros canales:</h4>
+      <ul style="margin: 0; padding-left: 16px; font-size: 14px; color: #4b5563">
+        <li style="margin-bottom: 8px">💬 Chat en vivo (24/7)</li>
+        <li style="margin-bottom: 8px">📧 support@clubplus.app</li>
+        <li style="margin-bottom: 8px">📱 WhatsApp: +1 (555) 123-4567</li>
+        <li>🌐 Portal de soporte</li>
+      </ul>
+    </td>
+  </tr>
 </table>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 32px 0;">
-    <tr>
-        <td align="center" style="padding: 0 20px;">
-            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
-                <tr>
-                    <td style="padding: 0 10px;">
-                        <a href="https://clubplus.app/help" 
-                           class="btn-outline" 
-                           style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #3B82F6; text-decoration: none; border: 2px solid #3B82F6; border-radius: 6px; font-size: 14px;">
-                            📚 Centro de ayuda
-                        </a>
-                    </td>
-                    <td style="padding: 0 10px;">
-                        <a href="https://clubplus.app/support/chat" 
-                           class="btn-outline" 
-                           style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #10B981; text-decoration: none; border: 2px solid #10B981; border-radius: 6px; font-size: 14px;">
-                            💬 Chat en vivo
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 32px 0"
+>
+  <tr>
+    <td align="center" style="padding: 0 20px">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td style="padding: 0 10px">
+            <a
+              href="https://clubplus.app/help"
+              class="btn-outline"
+              style="
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: transparent;
+                color: #3b82f6;
+                text-decoration: none;
+                border: 2px solid #3b82f6;
+                border-radius: 6px;
+                font-size: 14px;
+              "
+            >
+              📚 Centro de ayuda
+            </a>
+          </td>
+          <td style="padding: 0 10px">
+            <a
+              href="https://clubplus.app/support/chat"
+              class="btn-outline"
+              style="
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: transparent;
+                color: #10b981;
+                text-decoration: none;
+                border: 2px solid #10b981;
+                border-radius: 6px;
+                font-size: 14px;
+              "
+            >
+              💬 Chat en vivo
+            </a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 </table>
 
 <p class="content-text">
-    Valoramos mucho tu tiempo y haremos todo lo posible para resolver tu consulta de manera rápida y efectiva. 
-    Te mantendremos informado sobre cualquier progreso en tu ticket.
+  Valoramos mucho tu tiempo y haremos todo lo posible para resolver tu consulta de manera rápida y
+  efectiva. Te mantendremos informado sobre cualquier progreso en tu ticket.
 </p>
+
+<p class="content-text">Gracias por tu paciencia y por elegir Club+.</p>
 
 <p class="content-text">
-    Gracias por tu paciencia y por elegir Club+.
+  Atentamente,<br />
+  <strong>{{agent.name}} y el equipo de soporte de Club+</strong>
 </p>
 
-<p class="content-text">
-    Atentamente,<br>
-    <strong>{{agent.name}} y el equipo de soporte de Club+</strong>
+<hr style="border: none; border-top: 1px solid #e5e7eb; margin: 32px 0" />
+
+<p class="small-text" style="text-align: center">
+  Ticket #{{ticket.id}} creado el {{ticket.created_date}}<br />
+  Este email fue enviado a {{user.email}} como confirmación de tu solicitud de soporte
 </p>
 
-<hr style="border: none; border-top: 1px solid #E5E7EB; margin: 32px 0;">
-
-<p class="small-text" style="text-align: center;">
-    Ticket #{{ticket.id}} creado el {{ticket.created_date}}<br>
-    Este email fue enviado a {{user.email}} como confirmación de tu solicitud de soporte
-</p>
-
-<p class="small-text" style="text-align: center;">
-    <a href="https://clubplus.app/support/ticket/{{ticket.id}}" style="color: #3B82F6; text-decoration: none;">Ver ticket</a>
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-    <a href="https://clubplus.app/support/ticket/{{ticket.id}}/update" style="color: #3B82F6; text-decoration: none;">Actualizar</a>
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-    <a href="mailto:{{agent.email}}?subject=Re: Ticket #{{ticket.id}}" style="color: #3B82F6; text-decoration: none;">Responder por email</a>
+<p class="small-text" style="text-align: center">
+  <a
+    href="https://clubplus.app/support/ticket/{{ticket.id}}"
+    style="color: #3b82f6; text-decoration: none"
+    >Ver ticket</a
+  >
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a
+    href="https://clubplus.app/support/ticket/{{ticket.id}}/update"
+    style="color: #3b82f6; text-decoration: none"
+    >Actualizar</a
+  >
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a
+    href="mailto:{{agent.email}}?subject=Re: Ticket #{{ticket.id}}"
+    style="color: #3b82f6; text-decoration: none"
+    >Responder por email</a
+  >
 </p>

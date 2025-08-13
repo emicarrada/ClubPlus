@@ -1,220 +1,378 @@
 <!-- Profile Purchase Confirmation Template -->
 <h1 class="header-title secondary-color">¡Compra confirmada! 🎉</h1>
 
-<p class="content-text">
-    ¡Hola <strong>{{user.firstName}}</strong>!
-</p>
+<p class="content-text">¡Hola <strong>{{user.firstName}}</strong>!</p>
 
 <p class="content-text">
-    ¡Excelente noticia! Tu compra ha sido procesada exitosamente. Ahora tienes acceso a tu nuevo perfil de <strong>{{profile.type}}</strong> en Club+.
+  ¡Excelente noticia! Tu compra ha sido procesada exitosamente. Ahora tienes acceso a tu nuevo
+  perfil de <strong>{{profile.type}}</strong> en Club+.
 </p>
 
-<div style="background-color: #ECFDF5; border: 1px solid #10B981; border-radius: 8px; padding: 24px; margin: 32px 0;">
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-        <tr>
-            <td width="50%" style="vertical-align: top;">
-                <h3 style="margin: 0 0 16px 0; color: #047857; font-size: 18px;">📋 Detalles de tu compra</h3>
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                    <tr>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; font-size: 14px;">
-                            <strong style="color: #065F46;">Perfil:</strong>
-                        </td>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; text-align: right; font-size: 14px; color: #065F46;">
-                            {{profile.type}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; font-size: 14px;">
-                            <strong style="color: #065F46;">Servicio:</strong>
-                        </td>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; text-align: right; font-size: 14px; color: #065F46;">
-                            {{profile.service}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; font-size: 14px;">
-                            <strong style="color: #065F46;">Precio:</strong>
-                        </td>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; text-align: right; font-size: 14px; color: #065F46;">
-                            ${{payment.amount}} {{payment.currency}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px 0; font-size: 14px;">
-                            <strong style="color: #065F46;">Fecha:</strong>
-                        </td>
-                        <td style="padding: 8px 0; text-align: right; font-size: 14px; color: #065F46;">
-                            {{purchase.date}}
-                        </td>
-                    </tr>
-                </table>
+<div
+  style="
+    background-color: #ecfdf5;
+    border: 1px solid #10b981;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 32px 0;
+  "
+>
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+    <tr>
+      <td width="50%" style="vertical-align: top">
+        <h3 style="margin: 0 0 16px 0; color: #047857; font-size: 18px">
+          📋 Detalles de tu compra
+        </h3>
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+          <tr>
+            <td style="padding: 8px 0; border-bottom: 1px solid #a7f3d0; font-size: 14px">
+              <strong style="color: #065f46">Perfil:</strong>
             </td>
-            <td width="50%" style="vertical-align: top; padding-left: 24px;">
-                <h3 style="margin: 0 0 16px 0; color: #047857; font-size: 18px;">💳 Información de pago</h3>
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                    <tr>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; font-size: 14px;">
-                            <strong style="color: #065F46;">ID de transacción:</strong>
-                        </td>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; text-align: right; font-size: 14px; color: #065F46;">
-                            {{transaction.id}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; font-size: 14px;">
-                            <strong style="color: #065F46;">Método:</strong>
-                        </td>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; text-align: right; font-size: 14px; color: #065F46;">
-                            {{payment.method}}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; font-size: 14px;">
-                            <strong style="color: #065F46;">Estado:</strong>
-                        </td>
-                        <td style="padding: 8px 0; border-bottom: 1px solid #A7F3D0; text-align: right; font-size: 14px;">
-                            <span style="background-color: #10B981; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px;">✓ COMPLETADO</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px 0; font-size: 14px;">
-                            <strong style="color: #065F46;">Recibo:</strong>
-                        </td>
-                        <td style="padding: 8px 0; text-align: right; font-size: 14px;">
-                            <a href="{{receipt.url}}" style="color: #3B82F6; text-decoration: none;">Descargar PDF</a>
-                        </td>
-                    </tr>
-                </table>
+            <td
+              style="
+                padding: 8px 0;
+                border-bottom: 1px solid #a7f3d0;
+                text-align: right;
+                font-size: 14px;
+                color: #065f46;
+              "
+            >
+              {{profile.type}}
             </td>
-        </tr>
-    </table>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; border-bottom: 1px solid #a7f3d0; font-size: 14px">
+              <strong style="color: #065f46">Servicio:</strong>
+            </td>
+            <td
+              style="
+                padding: 8px 0;
+                border-bottom: 1px solid #a7f3d0;
+                text-align: right;
+                font-size: 14px;
+                color: #065f46;
+              "
+            >
+              {{profile.service}}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; border-bottom: 1px solid #a7f3d0; font-size: 14px">
+              <strong style="color: #065f46">Precio:</strong>
+            </td>
+            <td
+              style="
+                padding: 8px 0;
+                border-bottom: 1px solid #a7f3d0;
+                text-align: right;
+                font-size: 14px;
+                color: #065f46;
+              "
+            >
+              ${{payment.amount}} {{payment.currency}}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; font-size: 14px">
+              <strong style="color: #065f46">Fecha:</strong>
+            </td>
+            <td style="padding: 8px 0; text-align: right; font-size: 14px; color: #065f46">
+              {{purchase.date}}
+            </td>
+          </tr>
+        </table>
+      </td>
+      <td width="50%" style="vertical-align: top; padding-left: 24px">
+        <h3 style="margin: 0 0 16px 0; color: #047857; font-size: 18px">💳 Información de pago</h3>
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+          <tr>
+            <td style="padding: 8px 0; border-bottom: 1px solid #a7f3d0; font-size: 14px">
+              <strong style="color: #065f46">ID de transacción:</strong>
+            </td>
+            <td
+              style="
+                padding: 8px 0;
+                border-bottom: 1px solid #a7f3d0;
+                text-align: right;
+                font-size: 14px;
+                color: #065f46;
+              "
+            >
+              {{transaction.id}}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; border-bottom: 1px solid #a7f3d0; font-size: 14px">
+              <strong style="color: #065f46">Método:</strong>
+            </td>
+            <td
+              style="
+                padding: 8px 0;
+                border-bottom: 1px solid #a7f3d0;
+                text-align: right;
+                font-size: 14px;
+                color: #065f46;
+              "
+            >
+              {{payment.method}}
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; border-bottom: 1px solid #a7f3d0; font-size: 14px">
+              <strong style="color: #065f46">Estado:</strong>
+            </td>
+            <td
+              style="
+                padding: 8px 0;
+                border-bottom: 1px solid #a7f3d0;
+                text-align: right;
+                font-size: 14px;
+              "
+            >
+              <span
+                style="
+                  background-color: #10b981;
+                  color: white;
+                  padding: 2px 8px;
+                  border-radius: 12px;
+                  font-size: 12px;
+                "
+                >✓ COMPLETADO</span
+              >
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 0; font-size: 14px">
+              <strong style="color: #065f46">Recibo:</strong>
+            </td>
+            <td style="padding: 8px 0; text-align: right; font-size: 14px">
+              <a href="{{receipt.url}}" style="color: #3b82f6; text-decoration: none"
+                >Descargar PDF</a
+              >
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 </div>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 32px 0;">
-    <tr>
-        <td align="center">
-            <a href="https://clubplus.app/profiles/{{profile.id}}?utm_source=email&utm_medium=email&utm_campaign=purchase_confirmation&utm_content=access_profile_button" 
-               class="btn bg-secondary" 
-               style="background-color: #10B981; text-decoration: none; color: #ffffff;">
-                Acceder a mi perfil
-            </a>
-        </td>
-    </tr>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 32px 0">
+  <tr>
+    <td align="center">
+      <a
+        href="https://clubplus.app/profiles/{{profile.id}}?utm_source=email&utm_medium=email&utm_campaign=purchase_confirmation&utm_content=access_profile_button"
+        class="btn bg-secondary"
+        style="background-color: #10b981; text-decoration: none; color: #ffffff"
+      >
+        Acceder a mi perfil
+      </a>
+    </td>
+  </tr>
 </table>
 
-<div style="background-color: #F0F9FF; border-left: 4px solid #3B82F6; padding: 20px; margin: 32px 0;">
-    <h3 style="margin: 0 0 12px 0; color: #1E40AF; font-size: 16px;">🚀 ¿Qué sigue?</h3>
-    <p style="margin: 0 0 16px 0; font-size: 14px; color: #1E3A8A;">
-        Tu perfil estará listo para usar en aproximadamente <strong>5-10 minutos</strong>. 
-        Te enviaremos una notificación cuando esté completamente configurado.
-    </p>
-    <p style="margin: 0; font-size: 14px; color: #1E3A8A;">
-        Mientras tanto, puedes explorar las funciones disponibles en tu dashboard.
-    </p>
+<div
+  style="background-color: #f0f9ff; border-left: 4px solid #3b82f6; padding: 20px; margin: 32px 0"
+>
+  <h3 style="margin: 0 0 12px 0; color: #1e40af; font-size: 16px">🚀 ¿Qué sigue?</h3>
+  <p style="margin: 0 0 16px 0; font-size: 14px; color: #1e3a8a">
+    Tu perfil estará listo para usar en aproximadamente <strong>5-10 minutos</strong>. Te enviaremos
+    una notificación cuando esté completamente configurado.
+  </p>
+  <p style="margin: 0; font-size: 14px; color: #1e3a8a">
+    Mientras tanto, puedes explorar las funciones disponibles en tu dashboard.
+  </p>
 </div>
 
 <h3 class="section-title">Lo que incluye tu perfil {{profile.type}}:</h3>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="padding: 16px; background-color: #F9FAFB; border-radius: 8px; margin-bottom: 16px;">
-            <h4 style="margin: 0 0 8px 0; color: #1F2937; font-size: 16px;">✨ Configuración personalizada</h4>
-            <p style="margin: 0; font-size: 14px; color: #6B7280;">Perfil optimizado según tus necesidades específicas y objetivos</p>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td style="padding: 16px; background-color: #f9fafb; border-radius: 8px; margin-bottom: 16px">
+      <h4 style="margin: 0 0 8px 0; color: #1f2937; font-size: 16px">
+        ✨ Configuración personalizada
+      </h4>
+      <p style="margin: 0; font-size: 14px; color: #6b7280">
+        Perfil optimizado según tus necesidades específicas y objetivos
+      </p>
+    </td>
+  </tr>
 </table>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="padding: 16px; background-color: #F9FAFB; border-radius: 8px; margin-bottom: 16px;">
-            <h4 style="margin: 0 0 8px 0; color: #1F2937; font-size: 16px;">🔧 Herramientas profesionales</h4>
-            <p style="margin: 0; font-size: 14px; color: #6B7280;">Acceso completo a todas las herramientas de gestión y optimización</p>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td style="padding: 16px; background-color: #f9fafb; border-radius: 8px; margin-bottom: 16px">
+      <h4 style="margin: 0 0 8px 0; color: #1f2937; font-size: 16px">
+        🔧 Herramientas profesionales
+      </h4>
+      <p style="margin: 0; font-size: 14px; color: #6b7280">
+        Acceso completo a todas las herramientas de gestión y optimización
+      </p>
+    </td>
+  </tr>
 </table>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="padding: 16px; background-color: #F9FAFB; border-radius: 8px; margin-bottom: 16px;">
-            <h4 style="margin: 0 0 8px 0; color: #1F2937; font-size: 16px;">📊 Análisis y reportes</h4>
-            <p style="margin: 0; font-size: 14px; color: #6B7280;">Métricas detalladas y reportes personalizados de rendimiento</p>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td style="padding: 16px; background-color: #f9fafb; border-radius: 8px; margin-bottom: 16px">
+      <h4 style="margin: 0 0 8px 0; color: #1f2937; font-size: 16px">📊 Análisis y reportes</h4>
+      <p style="margin: 0; font-size: 14px; color: #6b7280">
+        Métricas detalladas y reportes personalizados de rendimiento
+      </p>
+    </td>
+  </tr>
 </table>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="padding: 16px; background-color: #F9FAFB; border-radius: 8px;">
-            <h4 style="margin: 0 0 8px 0; color: #1F2937; font-size: 16px;">💬 Soporte prioritario</h4>
-            <p style="margin: 0; font-size: 14px; color: #6B7280;">Atención especializada y respuesta prioritaria a tus consultas</p>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td style="padding: 16px; background-color: #f9fafb; border-radius: 8px">
+      <h4 style="margin: 0 0 8px 0; color: #1f2937; font-size: 16px">💬 Soporte prioritario</h4>
+      <p style="margin: 0; font-size: 14px; color: #6b7280">
+        Atención especializada y respuesta prioritaria a tus consultas
+      </p>
+    </td>
+  </tr>
 </table>
 
-<div style="background-color: #FFFBEB; border: 1px solid #F59E0B; border-radius: 8px; padding: 20px; margin: 32px 0;">
-    <h4 style="margin: 0 0 12px 0; color: #92400E; font-size: 16px;">💡 Consejo para maximizar tu inversión</h4>
-    <p style="margin: 0; font-size: 14px; color: #92400E;">
-        Para obtener los mejores resultados, te recomendamos completar tu perfil en los primeros 7 días. 
-        Nuestro equipo está disponible para ayudarte con la configuración inicial si lo necesitas.
-    </p>
+<div
+  style="
+    background-color: #fffbeb;
+    border: 1px solid #f59e0b;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 32px 0;
+  "
+>
+  <h4 style="margin: 0 0 12px 0; color: #92400e; font-size: 16px">
+    💡 Consejo para maximizar tu inversión
+  </h4>
+  <p style="margin: 0; font-size: 14px; color: #92400e">
+    Para obtener los mejores resultados, te recomendamos completar tu perfil en los primeros 7 días.
+    Nuestro equipo está disponible para ayudarte con la configuración inicial si lo necesitas.
+  </p>
 </div>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 32px 0;">
-    <tr>
-        <td align="center" style="padding: 0 20px;">
-            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
-                <tr>
-                    <td style="padding: 0 10px;">
-                        <a href="https://clubplus.app/dashboard?utm_source=email&utm_medium=email&utm_campaign=purchase_confirmation&utm_content=dashboard_button" 
-                           class="btn-outline" 
-                           style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #3B82F6; text-decoration: none; border: 2px solid #3B82F6; border-radius: 6px; font-size: 14px;">
-                            Mi Dashboard
-                        </a>
-                    </td>
-                    <td style="padding: 0 10px;">
-                        <a href="mailto:support@clubplus.app?subject=Ayuda%20con%20mi%20nuevo%20perfil" 
-                           class="btn-outline" 
-                           style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #10B981; text-decoration: none; border: 2px solid #10B981; border-radius: 6px; font-size: 14px;">
-                            Obtener Ayuda
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 32px 0"
+>
+  <tr>
+    <td align="center" style="padding: 0 20px">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td style="padding: 0 10px">
+            <a
+              href="https://clubplus.app/dashboard?utm_source=email&utm_medium=email&utm_campaign=purchase_confirmation&utm_content=dashboard_button"
+              class="btn-outline"
+              style="
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: transparent;
+                color: #3b82f6;
+                text-decoration: none;
+                border: 2px solid #3b82f6;
+                border-radius: 6px;
+                font-size: 14px;
+              "
+            >
+              Mi Dashboard
+            </a>
+          </td>
+          <td style="padding: 0 10px">
+            <a
+              href="mailto:support@clubplus.app?subject=Ayuda%20con%20mi%20nuevo%20perfil"
+              class="btn-outline"
+              style="
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: transparent;
+                color: #10b981;
+                text-decoration: none;
+                border: 2px solid #10b981;
+                border-radius: 6px;
+                font-size: 14px;
+              "
+            >
+              Obtener Ayuda
+            </a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 </table>
 
 <h3 class="section-title">¿Tienes preguntas?</h3>
 
 <p class="content-text">
-    Nuestro equipo está aquí para asegurar que saques el máximo provecho de tu nueva inversión:
+  Nuestro equipo está aquí para asegurar que saques el máximo provecho de tu nueva inversión:
 </p>
 
-<ul style="font-size: 16px; line-height: 1.6; color: #1F2937;">
-    <li style="margin-bottom: 8px;">📧 Email: <a href="mailto:support@clubplus.app" style="color: #3B82F6;">support@clubplus.app</a></li>
-    <li style="margin-bottom: 8px;">💬 Chat en vivo disponible 24/7 en tu dashboard</li>
-    <li style="margin-bottom: 8px;">📚 Centro de ayuda: <a href="https://clubplus.app/help" style="color: #3B82F6;">clubplus.app/help</a></li>
-    <li>🎥 Video tutoriales: <a href="https://clubplus.app/tutorials" style="color: #3B82F6;">clubplus.app/tutorials</a></li>
+<ul style="font-size: 16px; line-height: 1.6; color: #1f2937">
+  <li style="margin-bottom: 8px">
+    📧 Email: <a href="mailto:support@clubplus.app" style="color: #3b82f6">support@clubplus.app</a>
+  </li>
+  <li style="margin-bottom: 8px">💬 Chat en vivo disponible 24/7 en tu dashboard</li>
+  <li style="margin-bottom: 8px">
+    📚 Centro de ayuda:
+    <a href="https://clubplus.app/help" style="color: #3b82f6">clubplus.app/help</a>
+  </li>
+  <li>
+    🎥 Video tutoriales:
+    <a href="https://clubplus.app/tutorials" style="color: #3b82f6">clubplus.app/tutorials</a>
+  </li>
 </ul>
 
-<p class="content-text">
-    ¡Gracias por confiar en Club+ para gestionar tu presencia digital!
-</p>
+<p class="content-text">¡Gracias por confiar en Club+ para gestionar tu presencia digital!</p>
 
 <p class="content-text">
-    Saludos y mucho éxito,<br>
-    <strong>El equipo de Club+</strong>
+  Saludos y mucho éxito,<br />
+  <strong>El equipo de Club+</strong>
 </p>
 
-<hr style="border: none; border-top: 1px solid #E5E7EB; margin: 32px 0;">
+<hr style="border: none; border-top: 1px solid #e5e7eb; margin: 32px 0" />
 
-<p class="small-text" style="text-align: center;">
-    Este email confirma tu compra realizada el {{purchase.date}}.<br>
-    Guarda este email como comprobante de tu transacción.
+<p class="small-text" style="text-align: center">
+  Este email confirma tu compra realizada el {{purchase.date}}.<br />
+  Guarda este email como comprobante de tu transacción.
 </p>
 
-<p class="small-text" style="text-align: center;">
-    <a href="{{receipt.url}}" style="color: #3B82F6; text-decoration: none;">Descargar recibo</a>
-    &nbsp;&nbsp;|&nbsp;&nbsp;
-    <a href="https://clubplus.app/billing" style="color: #3B82F6; text-decoration: none;">Ver historial de compras</a>
+<p class="small-text" style="text-align: center">
+  <a href="{{receipt.url}}" style="color: #3b82f6; text-decoration: none">Descargar recibo</a>
+  &nbsp;&nbsp;|&nbsp;&nbsp;
+  <a href="https://clubplus.app/billing" style="color: #3b82f6; text-decoration: none"
+    >Ver historial de compras</a
+  >
 </p>

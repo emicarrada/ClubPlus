@@ -1,122 +1,167 @@
 <!-- Email Verification Template -->
 <h1 class="header-title primary-color">Verifica tu email 📧</h1>
 
-<p class="content-text">
-    Hola <strong>{{user.firstName}}</strong>,
-</p>
+<p class="content-text">Hola <strong>{{user.firstName}}</strong>,</p>
 
 <p class="content-text">
-    Gracias por registrarte en Club+. Para completar tu registro y acceder a todas las funcionalidades, 
-    necesitamos verificar tu dirección de email.
+  Gracias por registrarte en Club+. Para completar tu registro y acceder a todas las
+  funcionalidades, necesitamos verificar tu dirección de email.
 </p>
 
-<div style="background-color: #FEF3C7; border-left: 4px solid #F59E0B; padding: 20px; margin: 24px 0;">
-    <h3 style="margin: 0 0 8px 0; color: #92400E; font-size: 16px;">⚡ Verificación requerida</h3>
-    <p style="margin: 0; font-size: 14px; color: #92400E;">
-        Tu cuenta está pendiente de verificación. Haz clic en el botón de abajo para confirmar tu email.
-    </p>
+<div
+  style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; margin: 24px 0"
+>
+  <h3 style="margin: 0 0 8px 0; color: #92400e; font-size: 16px">⚡ Verificación requerida</h3>
+  <p style="margin: 0; font-size: 14px; color: #92400e">
+    Tu cuenta está pendiente de verificación. Haz clic en el botón de abajo para confirmar tu email.
+  </p>
 </div>
 
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 32px 0;">
-    <tr>
-        <td align="center">
-            <a href="{{verification_url}}?utm_source=email&utm_medium=email&utm_campaign=verification&utm_content=verify_button" 
-               class="btn bg-secondary" 
-               style="background-color: #10B981; text-decoration: none; color: #ffffff;">
-                Verificar mi email
-            </a>
-        </td>
-    </tr>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 32px 0">
+  <tr>
+    <td align="center">
+      <a
+        href="{{verification_url}}?utm_source=email&utm_medium=email&utm_campaign=verification&utm_content=verify_button"
+        class="btn bg-secondary"
+        style="background-color: #10b981; text-decoration: none; color: #ffffff"
+      >
+        Verificar mi email
+      </a>
+    </td>
+  </tr>
 </table>
 
-<p class="small-text" style="text-align: center; margin: 16px 0;">
-    O copia y pega este enlace en tu navegador:<br>
-    <a href="{{verification_url}}" style="color: #3B82F6; word-break: break-all;">{{verification_url}}</a>
+<p class="small-text" style="text-align: center; margin: 16px 0">
+  O copia y pega este enlace en tu navegador:<br />
+  <a href="{{verification_url}}" style="color: #3b82f6; word-break: break-all"
+    >{{verification_url}}</a
+  >
 </p>
 
-<div style="background-color: #F3F4F6; border-radius: 8px; padding: 20px; margin: 32px 0;">
-    <h4 style="margin: 0 0 12px 0; color: #1F2937; font-size: 16px;">🔒 ¿Por qué verificar tu email?</h4>
-    <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #4B5563;">
-        <li style="margin-bottom: 8px;">Protege tu cuenta de accesos no autorizados</li>
-        <li style="margin-bottom: 8px;">Permite que te enviemos notificaciones importantes</li>
-        <li style="margin-bottom: 8px;">Habilita funciones de recuperación de contraseña</li>
-        <li>Asegura que recibas actualizaciones sobre tus servicios</li>
-    </ul>
+<div style="background-color: #f3f4f6; border-radius: 8px; padding: 20px; margin: 32px 0">
+  <h4 style="margin: 0 0 12px 0; color: #1f2937; font-size: 16px">
+    🔒 ¿Por qué verificar tu email?
+  </h4>
+  <ul style="margin: 0; padding-left: 20px; font-size: 14px; color: #4b5563">
+    <li style="margin-bottom: 8px">Protege tu cuenta de accesos no autorizados</li>
+    <li style="margin-bottom: 8px">Permite que te enviemos notificaciones importantes</li>
+    <li style="margin-bottom: 8px">Habilita funciones de recuperación de contraseña</li>
+    <li>Asegura que recibas actualizaciones sobre tus servicios</li>
+  </ul>
 </div>
 
-<div style="background-color: #FEE2E2; border: 1px solid #EF4444; border-radius: 8px; padding: 20px; margin: 32px 0;">
-    <h4 style="margin: 0 0 12px 0; color: #DC2626; font-size: 16px;">⏰ Tiempo límite</h4>
-    <p style="margin: 0; font-size: 14px; color: #7F1D1D;">
-        Este enlace de verificación expirará en <strong>24 horas</strong>. 
-        Si no verificas tu email dentro de este tiempo, deberás solicitar un nuevo enlace.
-    </p>
+<div
+  style="
+    background-color: #fee2e2;
+    border: 1px solid #ef4444;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 32px 0;
+  "
+>
+  <h4 style="margin: 0 0 12px 0; color: #dc2626; font-size: 16px">⏰ Tiempo límite</h4>
+  <p style="margin: 0; font-size: 14px; color: #7f1d1d">
+    Este enlace de verificación expirará en <strong>24 horas</strong>. Si no verificas tu email
+    dentro de este tiempo, deberás solicitar un nuevo enlace.
+  </p>
 </div>
 
 <h3 class="section-title">¿Problemas para verificar?</h3>
 
+<p class="content-text">Si el botón no funciona o tienes problemas, puedes:</p>
+
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td style="padding: 12px; background-color: #f9fafb; border-radius: 6px; margin-bottom: 12px">
+      <p style="margin: 0; font-size: 14px; color: #4b5563">
+        📋 <strong>Copiar el enlace:</strong> Usa el enlace de texto de arriba
+      </p>
+    </td>
+  </tr>
+</table>
+
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td style="padding: 12px; background-color: #f9fafb; border-radius: 6px; margin-bottom: 12px">
+      <p style="margin: 0; font-size: 14px; color: #4b5563">
+        🔄 <strong>Solicitar nuevo enlace:</strong> Ve a tu dashboard y solicita una nueva
+        verificación
+      </p>
+    </td>
+  </tr>
+</table>
+
+<table
+  role="presentation"
+  cellspacing="0"
+  cellpadding="0"
+  border="0"
+  width="100%"
+  style="margin: 20px 0"
+>
+  <tr>
+    <td style="padding: 12px; background-color: #f9fafb; border-radius: 6px">
+      <p style="margin: 0; font-size: 14px; color: #4b5563">
+        📧 <strong>Contactar soporte:</strong> Escríbenos a support@clubplus.app
+      </p>
+    </td>
+  </tr>
+</table>
+
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 32px 0">
+  <tr>
+    <td align="center">
+      <a
+        href="https://clubplus.app/dashboard?utm_source=email&utm_medium=email&utm_campaign=verification&utm_content=dashboard_button"
+        class="btn-outline"
+        style="
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: transparent;
+          color: #3b82f6;
+          text-decoration: none;
+          border: 2px solid #3b82f6;
+          border-radius: 6px;
+          font-size: 14px;
+        "
+      >
+        Ir al Dashboard
+      </a>
+    </td>
+  </tr>
+</table>
+
 <p class="content-text">
-    Si el botón no funciona o tienes problemas, puedes:
-</p>
-
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="padding: 12px; background-color: #F9FAFB; border-radius: 6px; margin-bottom: 12px;">
-            <p style="margin: 0; font-size: 14px; color: #4B5563;">
-                📋 <strong>Copiar el enlace:</strong> Usa el enlace de texto de arriba
-            </p>
-        </td>
-    </tr>
-</table>
-
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="padding: 12px; background-color: #F9FAFB; border-radius: 6px; margin-bottom: 12px;">
-            <p style="margin: 0; font-size: 14px; color: #4B5563;">
-                🔄 <strong>Solicitar nuevo enlace:</strong> Ve a tu dashboard y solicita una nueva verificación
-            </p>
-        </td>
-    </tr>
-</table>
-
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 20px 0;">
-    <tr>
-        <td style="padding: 12px; background-color: #F9FAFB; border-radius: 6px;">
-            <p style="margin: 0; font-size: 14px; color: #4B5563;">
-                📧 <strong>Contactar soporte:</strong> Escríbenos a support@clubplus.app
-            </p>
-        </td>
-    </tr>
-</table>
-
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 32px 0;">
-    <tr>
-        <td align="center">
-            <a href="https://clubplus.app/dashboard?utm_source=email&utm_medium=email&utm_campaign=verification&utm_content=dashboard_button" 
-               class="btn-outline" 
-               style="display: inline-block; padding: 10px 20px; background-color: transparent; color: #3B82F6; text-decoration: none; border: 2px solid #3B82F6; border-radius: 6px; font-size: 14px;">
-                Ir al Dashboard
-            </a>
-        </td>
-    </tr>
-</table>
-
-<p class="content-text">
-    Una vez verificado tu email, podrás acceder a todas las funciones de Club+ y comenzar a 
-    gestionar tus perfiles digitales de manera eficiente.
+  Una vez verificado tu email, podrás acceder a todas las funciones de Club+ y comenzar a gestionar
+  tus perfiles digitales de manera eficiente.
 </p>
 
 <p class="content-text">
-    Gracias por elegir Club+,<br>
-    <strong>El equipo de Club+</strong>
+  Gracias por elegir Club+,<br />
+  <strong>El equipo de Club+</strong>
 </p>
 
-<hr style="border: none; border-top: 1px solid #E5E7EB; margin: 32px 0;">
+<hr style="border: none; border-top: 1px solid #e5e7eb; margin: 32px 0" />
 
-<p class="small-text" style="text-align: center;">
-    Este email fue enviado a {{user.email}} para verificar tu cuenta en Club+.<br>
-    Si no creaste esta cuenta, puedes ignorar este email de forma segura.
+<p class="small-text" style="text-align: center">
+  Este email fue enviado a {{user.email}} para verificar tu cuenta en Club+.<br />
+  Si no creaste esta cuenta, puedes ignorar este email de forma segura.
 </p>
 
-<p class="small-text" style="text-align: center; color: #9CA3AF;">
-    Código de verificación: {{verification_code}} (para referencia de soporte)
+<p class="small-text" style="text-align: center; color: #9ca3af">
+  Código de verificación: {{verification_code}} (para referencia de soporte)
 </p>
