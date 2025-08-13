@@ -1,8 +1,7 @@
 # Política de Privacidad - Club+
 
-**Fecha de vigencia**: 13 de agosto de 2025  
-**Última actualización**: 13 de agosto de 2025  
-**Versión**: 1.0
+**Fecha de vigencia**: 13 de agosto de 2025 **Última actualización**: 13 de
+agosto de 2025 **Versión**: 1.0
 
 ---
 
@@ -370,17 +369,14 @@ Mantenemos un historial público de cambios en: clubplus.app/privacy-history
 
 ### 12.1 Oficial de Privacidad
 
-**Email**: privacy@clubplus.app  
-**Teléfono**: +1 (555) 123-PRIV  
-**Dirección**: Privacy Officer, Club+ Technologies Inc., 123 Tech Street, San
-Francisco, CA 94102, USA
+**Email**: privacy@clubplus.app **Teléfono**: +1 (555) 123-PRIV **Dirección**:
+Privacy Officer, Club+ Technologies Inc., 123 Tech Street, San Francisco, CA
+94102, USA
 
 ### 12.2 Representante en la UE
 
-Para usuarios en la Unión Europea:  
-**Email**: eu-rep@clubplus.app  
-**Dirección**: Club+ EU Representative, 456 Europa Avenue, Amsterdam,
-Netherlands
+Para usuarios en la Unión Europea: **Email**: eu-rep@clubplus.app **Dirección**:
+Club+ EU Representative, 456 Europa Avenue, Amsterdam, Netherlands
 
 ### 12.3 Autoridades de Protección de Datos
 

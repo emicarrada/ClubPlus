@@ -253,6 +253,5 @@ legal/
 
 ---
 
-**Última actualización**: 13 de agosto de 2025  
-**Versión**: 1.0  
-**Próxima revisión**: 13 de noviembre de 2025
+**Última actualización**: 13 de agosto de 2025 **Versión**: 1.0 **Próxima
+revisión**: 13 de noviembre de 2025

@@ -1,8 +1,7 @@
 # Acuerdo de Procesamiento de Datos (DPA) - Club+
 
-**Fecha de vigencia**: 13 de agosto de 2025  
-**Última actualización**: 13 de agosto de 2025  
-**Versión**: 1.0
+**Fecha de vigencia**: 13 de agosto de 2025 **Última actualización**: 13 de
+agosto de 2025 **Versión**: 1.0
 
 ---
 
@@ -356,15 +355,12 @@ Este DPA puede modificarse:
 
 ### 12.2 Contacto para DPA
 
-**Data Protection Officer**:  
-Email: dpo@clubplus.app  
-Teléfono: +1 (555) 123-DPO  
+**Data Protection Officer**: Email: dpo@clubplus.app Teléfono: +1 (555) 123-DPO
 Dirección: Club+ Technologies Inc., 123 Tech Street, San Francisco, CA 94102,
 USA
 
-**Representante en la UE**:  
-Email: eu-rep@clubplus.app  
-Dirección: Club+ EU Representative, 456 Europa Avenue, Amsterdam, Netherlands
+**Representante en la UE**: Email: eu-rep@clubplus.app Dirección: Club+ EU
+Representative, 456 Europa Avenue, Amsterdam, Netherlands
 
 ---
 

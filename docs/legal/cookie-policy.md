@@ -1,8 +1,7 @@
 # Política de Cookies - Club+
 
-**Fecha de vigencia**: 13 de agosto de 2025  
-**Última actualización**: 13 de agosto de 2025  
-**Versión**: 1.0
+**Fecha de vigencia**: 13 de agosto de 2025 **Última actualización**: 13 de
+agosto de 2025 **Versión**: 1.0
 
 ---
 
@@ -330,15 +329,13 @@ Cuando implementamos nuevas cookies:
 
 ### 10.1 Preguntas sobre Cookies
 
-**Email**: cookies@clubplus.app  
-**Teléfono**: +1 (555) 123-COOK  
-**Formulario**: clubplus.app/cookie-support
+**Email**: cookies@clubplus.app **Teléfono**: +1 (555) 123-COOK **Formulario**:
+clubplus.app/cookie-support
 
 ### 10.2 Oficial de Protección de Datos
 
-**Email**: dpo@clubplus.app  
-**Dirección**: Data Protection Officer, Club+ Technologies Inc., 123 Tech
-Street, San Francisco, CA 94102, USA
+**Email**: dpo@clubplus.app **Dirección**: Data Protection Officer, Club+
+Technologies Inc., 123 Tech Street, San Francisco, CA 94102, USA
 
 ### 10.3 Autoridades Regulatorias
 

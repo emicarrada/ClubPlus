@@ -1,8 +1,7 @@
 # Términos de Servicio - Club+
 
-**Fecha de vigencia**: 13 de agosto de 2025  
-**Última actualización**: 13 de agosto de 2025  
-**Versión**: 1.0
+**Fecha de vigencia**: 13 de agosto de 2025 **Última actualización**: 13 de
+agosto de 2025 **Versión**: 1.0
 
 ---
 
@@ -207,10 +206,8 @@ después de la terminación.
 
 Para preguntas sobre estos términos:
 
-**Email**: legal@clubplus.app  
-**Dirección**: Club+ Technologies Inc., 123 Tech Street, San Francisco, CA
-94102, USA  
-**Teléfono**: +1 (555) 123-CLUB  
+**Email**: legal@clubplus.app **Dirección**: Club+ Technologies Inc., 123 Tech
+Street, San Francisco, CA 94102, USA **Teléfono**: +1 (555) 123-CLUB
 **Horario**: Lunes a Viernes, 9:00 AM - 6:00 PM PST
 
 ---
