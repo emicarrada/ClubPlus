@@ -1,7 +1,7 @@
 // Club+ MVP - Schema de base de datos
-// Combos: 
+// Combos:
 // 1. Disney+ + HBO Max (Entretenimiento)
-// 2. Disney+ + Canva Pro (Creativo)  
+// 2. Disney+ + Canva Pro (Creativo)
 // 3. Disney+ + HBO Max + Canva Pro (Completo)
 
 generator client {
@@ -22,7 +22,7 @@ model User {
   name         String
   phone        String?
   createdAt    DateTime  @default(now())
-  
+
   // Relaciones
   combos       Combo[]
   assignments  Assignment[]
@@ -39,7 +39,7 @@ model Platform {
   description String?
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
-  
+
   // Relaciones
   accounts          Account[]
   comboPlatforms    ComboPlatform[]
@@ -52,7 +52,7 @@ model ComboTemplate {
   price       Float?    // Precio a definir
   isActive    Boolean   @default(true)
   createdAt   DateTime  @default(now())
-  
+
   // Relaciones
   platforms   ComboPlatform[]
   combos      Combo[]
@@ -64,7 +64,7 @@ model ComboPlatform {
   comboTemplateId String
   platform        Platform      @relation(fields: [platformId], references: [id], onDelete: Cascade)
   platformId      String
-  
+
   @@unique([comboTemplateId, platformId])
 }
 
@@ -78,11 +78,11 @@ model Combo {
   priceFinal      Float
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
-  
+
   // Relaciones
   payments      Payment[]
   subscription  Subscription?
-  
+
   @@unique([userId, status], name: "one_active_combo_per_user")
 }
 
@@ -103,7 +103,7 @@ model Account {
   status      AccountStatus @default(ACTIVE)
   maxProfiles Int           @default(4) // Límite de perfiles por cuenta
   createdAt   DateTime      @default(now())
-  
+
   // Relaciones
   profiles    Profile[]
 }
@@ -122,7 +122,7 @@ model Profile {
   avatarUrl   String?
   status      ProfileStatus @default(AVAILABLE)
   createdAt   DateTime      @default(now())
-  
+
   // Relaciones
   assignments Assignment[]
 }
@@ -141,7 +141,7 @@ model Assignment {
   profileId   String
   assignedAt  DateTime  @default(now())
   releasedAt  DateTime?
-  
+
   @@unique([userId, profileId], name: "unique_user_profile_assignment")
 }
 
@@ -184,7 +184,7 @@ model Subscription {
   cancelAtPeriodEnd  Boolean        @default(false)
   createdAt    DateTime           @default(now())
   updatedAt    DateTime           @updatedAt
-  
+
   // Relaciones
   renewals     Renewal[]
 }
@@ -207,7 +207,7 @@ model Renewal {
   succeededAt     DateTime?
   failureReason   String?
   nextAttemptAt   DateTime?
-  
+
   @@index([subscriptionId, status])
 }
 
@@ -231,6 +231,6 @@ model Referral {
   reward       Float?    // Recompensa para el referrer
   createdAt    DateTime  @default(now())
   completedAt  DateTime?
-  
+
   @@unique([referrerId, referredId])
 }
