@@ -1,7 +1,7 @@
-import app from './app';
+import { initializeApp } from './app';
 import { env } from './config/environment';
 import { logger } from './config/logger';
-import { initializeDatabase, disconnectDatabase } from './config/database';
+import { disconnectDatabase } from './lib/prisma';
 
 // Server instance
 let server: any;
@@ -9,25 +9,19 @@ let server: any;
 // Start server function
 const startServer = async () => {
   try {
-    // Try to initialize database connection at startup (non-blocking)
-    logger.info('Testing database connection...');
-    try {
-      await initializeDatabase();
-      logger.info('Database connection successful');
-    } catch (dbError) {
-      logger.warn('Database connection failed, but server will start anyway', {
-        error: dbError instanceof Error ? dbError.message : 'Unknown database error'
-      });
-    }
+    // Initialize the application (this will establish database connection)
+    logger.info('🚀 Starting ClubPlus Backend Server...');
+    const app = await initializeApp();
 
     // Start Express server
     server = app.listen(env.PORT, () => {
-      logger.info('Server started successfully', {
+      logger.info('✅ Server started successfully', {
         port: env.PORT,
         environment: env.NODE_ENV,
         nodeVersion: process.version,
         timestamp: new Date().toISOString(),
-        service: 'ClubPlus Backend'
+        service: 'ClubPlus Backend',
+        database: 'PostgreSQL'
       });
     });
 

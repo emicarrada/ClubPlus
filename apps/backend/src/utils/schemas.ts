@@ -177,6 +177,27 @@ export const resetPasswordSchema = z.object({
   newPassword: passwordSchema,
 });
 
+/**
+ * Schema para change password
+ */
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1, 'Current password is required'),
+  newPassword: passwordSchema,
+  confirmPassword: z.string().min(1, 'Password confirmation is required')
+}).refine((data) => data.newPassword === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
+});
+
+/**
+ * Schema para update profile
+ */
+export const updateProfileSchema = z.object({
+  firstName: z.string().min(1, 'First name is required').max(50, 'First name too long').optional(),
+  lastName: z.string().min(1, 'Last name is required').max(50, 'Last name too long').optional(),
+  phone: z.string().optional(),
+});
+
 // ============================================================================
 // VALIDATION HELPERS
 // ============================================================================
@@ -211,6 +232,8 @@ export const dateRangeSchema = z.object({
 export type CreateUserInput = z.infer<typeof createUserSchema>;
 export type UpdateUserInput = z.infer<typeof updateUserSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;
+export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
+export type UpdateProfileInput = z.infer<typeof updateProfileSchema>;
 export type CreateComboInput = z.infer<typeof createComboSchema>;
 export type UpdateComboInput = z.infer<typeof updateComboSchema>;
 export type ComboQueryInput = z.infer<typeof comboQuerySchema>;

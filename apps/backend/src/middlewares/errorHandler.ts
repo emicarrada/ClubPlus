@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import { logger } from '../config/logger';
-import { env } from '../config/environment';
 import { AppError } from '../utils/errors';
 
 export const errorHandler = (
@@ -31,7 +30,7 @@ export const errorHandler = (
     };
 
     // Include error details in development or if details are provided
-    if (env.NODE_ENV === 'development' || err.details) {
+    if (process.env.NODE_ENV === 'development' || err.details) {
       errorResponse.error.details = err.details || err.stack;
     }
 
@@ -78,7 +77,7 @@ export const errorHandler = (
   };
 
   // Include error details only in development for unknown errors
-  if (env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     errorResponse.error.details = err.stack;
   }
 
