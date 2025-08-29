@@ -14,11 +14,28 @@
   body {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', Inter, system-ui, sans-serif;
+    font-family: 'Poppins', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply bg-secondary text-gray-dark;
-    scroll-behavior: smooth;
+  }
+
+  /* Accessibility utilities */
+  .sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+
+  /* Focus styles for better accessibility */
+  *:focus-visible {
+    outline: 2px solid #ff0000 !important;
+    outline-offset: 2px !important;
   }
 
   h1,
@@ -27,58 +44,46 @@
   h4,
   h5,
   h6 {
-    @apply font-title text-gray-dark;
-  }
-
-  h1 {
-    @apply text-hero;
-  }
-
-  h2 {
-    @apply text-h2;
-  }
-
-  p,
-  span,
-  div {
-    @apply text-body;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 600;
+    color: #1f2937;
   }
 }
 
 @layer components {
   /* Club+ Button Styles */
   .btn-primary {
-    @apply bg-primary text-secondary px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:shadow-hover hover:scale-105 active:scale-95;
+    @apply bg-red-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:bg-red-700 focus:ring-2 focus:ring-red-500;
   }
 
   .btn-secondary {
-    @apply bg-secondary text-primary border-2 border-primary px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:bg-primary hover:text-secondary;
+    @apply bg-white text-red-600 border-2 border-red-600 px-6 py-3 rounded-xl font-medium transition-all duration-200 hover:bg-red-600 hover:text-white;
   }
 
   /* Club+ Input Styles */
   .input-primary {
-    @apply w-full px-4 py-3 rounded-xl border border-gray-300 bg-secondary text-gray-dark placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+    @apply w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200;
   }
 
   .input-error {
-    @apply border-error focus:ring-error;
+    @apply border-red-500 focus:ring-red-500;
   }
 
   .input-success {
-    @apply border-success focus:ring-success;
+    @apply border-green-500 focus:ring-green-500;
   }
 
   /* Club+ Card Styles */
   .card {
-    @apply bg-secondary rounded-2xl shadow-soft p-6 border border-gray-100 transition-all duration-200 hover:shadow-hover;
+    @apply bg-white rounded-2xl shadow-lg p-6 border border-gray-100 transition-all duration-200 hover:shadow-xl;
   }
 
   .card-combo {
-    @apply card hover:scale-105 cursor-pointer border-2 hover:border-primary;
+    @apply card hover:scale-105 cursor-pointer border-2 hover:border-red-600;
   }
 
-  /* Club+ Layout */
-  .container-main {
+  /* Club+ Layout Utilities */
+  .container-club {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
@@ -87,15 +92,22 @@
   }
 }
 
-#root {
-  min-height: 100vh;
-}
-
-/* Custom utility classes */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  /* Club+ Custom Utilities */
+  .text-gradient {
+    background: linear-gradient(135deg, #ff0000 0%, #dc2626 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shadow-club {
+    box-shadow:
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  .shadow-club-hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   }
 }
-
-/* Component styles will be added in Week 3 */

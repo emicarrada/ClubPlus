@@ -10,6 +10,7 @@ import { useAuth } from '../hooks/useAuth';
 interface LoginFormData {
   email: string;
   password: string;
+  rememberMe: boolean;
 }
 
 const LoginPage: React.FC = () => {
@@ -23,8 +24,20 @@ const LoginPage: React.FC = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<LoginFormData>();
+
+  // Load saved email on mount
+  React.useEffect(() => {
+    const savedEmail = localStorage.getItem('savedEmail');
+    const rememberMe = localStorage.getItem('rememberMe') === 'true';
+
+    if (rememberMe && savedEmail) {
+      setValue('email', savedEmail);
+      setValue('rememberMe', true);
+    }
+  }, [setValue]);
 
   const onSubmit = async (data: LoginFormData) => {
     try {
@@ -32,6 +45,16 @@ const LoginPage: React.FC = () => {
       setError('');
 
       await login(data.email, data.password);
+
+      // Handle Remember Me
+      if (data.rememberMe) {
+        localStorage.setItem('rememberMe', 'true');
+        localStorage.setItem('savedEmail', data.email);
+      } else {
+        localStorage.removeItem('rememberMe');
+        localStorage.removeItem('savedEmail');
+      }
+
       navigate('/dashboard');
     } catch (err: any) {
       console.error('Login error:', err);
@@ -120,6 +143,17 @@ const LoginPage: React.FC = () => {
         </div>
 
         <div className='flex items-center justify-between'>
+          <div className='flex items-center'>
+            <input
+              id='remember-me'
+              type='checkbox'
+              {...register('rememberMe')}
+              className='h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded'
+            />
+            <label htmlFor='remember-me' className='ml-2 block text-sm text-gray-900'>
+              Recordarme
+            </label>
+          </div>
           <div className='text-sm'>
             <Link
               to='/forgot-password'
