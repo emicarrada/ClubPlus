@@ -7,6 +7,14 @@ process.env.NODE_ENV = 'test';
 process.env.PORT = '3001'; // Different port for tests
 process.env.LOG_LEVEL = 'error'; // Minimal logging during tests
 process.env.DATABASE_URL = 'postgresql://test:test@localhost:5432/clubplus_test';
+process.env.CORS_ORIGIN = 'http://localhost:3000';
+
+// JWT Configuration for tests
+process.env.JWT_SECRET = 'test-jwt-secret-key-for-testing-only';
+process.env.JWT_REFRESH_SECRET = 'test-refresh-secret-key-for-testing-only';
+process.env.JWT_EXPIRES_IN = '1h';
+process.env.JWT_REFRESH_EXPIRES_IN = '7d';
+process.env.BCRYPT_SALT_ROUNDS = '10';
 
 // Mock external dependencies globally
 jest.mock('../config/database', () => ({

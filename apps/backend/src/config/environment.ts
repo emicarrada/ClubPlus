@@ -2,8 +2,10 @@ import { z } from 'zod';
 import dotenv from 'dotenv';
 import path from 'path';
 
-// Load environment variables from root .env file
-dotenv.config({ path: path.resolve(process.cwd(), '../../.env') });
+// Load environment variables from backend .env file
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+// Also try loading from the backend directory
+dotenv.config();
 
 // Environment validation schema
 const envSchema = z.object({
