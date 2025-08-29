@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
-import { useAuth } from '../hooks/useAuth';
+import { useLogin } from '../hooks/useApi';
 
 interface LoginFormData {
   email: string;
@@ -15,10 +15,9 @@ interface LoginFormData {
 
 const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>('');
 
-  const { login } = useAuth();
+  const loginMutation = useLogin();
   const navigate = useNavigate();
 
   const {
@@ -41,28 +40,27 @@ const LoginPage: React.FC = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      setIsLoading(true);
       setError('');
 
-      await login(data.email, data.password);
+      await loginMutation.mutateAsync({
+        email: data.email,
+        password: data.password,
+      });
 
       // Handle Remember Me
       if (data.rememberMe) {
-        localStorage.setItem('rememberMe', 'true');
         localStorage.setItem('savedEmail', data.email);
+        localStorage.setItem('rememberMe', 'true');
       } else {
-        localStorage.removeItem('rememberMe');
         localStorage.removeItem('savedEmail');
+        localStorage.removeItem('rememberMe');
       }
 
+      // Navigate to dashboard on successful login
       navigate('/dashboard');
-    } catch (err: any) {
-      console.error('Login error:', err);
-      setError(
-        err.response?.data?.error?.message || 'Error al iniciar sesión. Verifica tus credenciales.',
-      );
-    } finally {
-      setIsLoading(false);
+    } catch (error: any) {
+      console.error('Login error:', error);
+      setError(error?.response?.data?.error?.message || 'Error al iniciar sesión');
     }
   };
 
@@ -164,8 +162,8 @@ const LoginPage: React.FC = () => {
           </div>
         </div>
 
-        <Button type='submit' variant='primary' size='lg' isLoading={isLoading} className='w-full'>
-          {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+        <Button type='submit' variant='primary' size='lg' isLoading={loginMutation.isPending} className='w-full'>
+          {loginMutation.isPending ? 'Iniciando sesión...' : 'Iniciar Sesión'}
         </Button>
       </form>
 

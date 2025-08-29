@@ -2,10 +2,9 @@
 
 ## 📊 **RESUMEN DEL PUSH**
 
-**Fecha:** 29 de agosto de 2025  
-**Commit Hash:** `43ad78e`  
-**Archivos modificados:** 6 archivos, 409 insertions, 111 deletions  
-**Repository:** `emicarrada/ClubPlus` - Branch `main`
+**Fecha:** 29 de agosto de 2025 **Commit Hash:** `43ad78e` **Archivos
+modificados:** 6 archivos, 409 insertions, 111 deletions **Repository:**
+`emicarrada/ClubPlus` - Branch `main`
 
 ---
 
@@ -144,5 +143,5 @@
 
 ---
 
-**✨ ¡ENTREGABLE 2 EXITOSAMENTE SUBIDO A GITHUB!**  
-**🎯 Frontend de Club+ listo para la siguiente fase de integración**
+**✨ ¡ENTREGABLE 2 EXITOSAMENTE SUBIDO A GITHUB!** **🎯 Frontend de Club+ listo
+para la siguiente fase de integración**

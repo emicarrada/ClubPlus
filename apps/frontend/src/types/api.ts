@@ -1,12 +1,8 @@
-// Club+ API Types
+// Club+ API Types - Updated for real backend integration
 export interface ApiResponse<T = any> {
   success: boolean;
-  data?: T;
+  data: T;
   message?: string;
-  error?: {
-    message: string;
-    code: string;
-  };
 }
 
 export interface ApiError {
@@ -14,10 +10,30 @@ export interface ApiError {
   error: {
     message: string;
     code: string;
+    details?: any;
   };
 }
 
-// Club+ Combo Types (MVP)
+// Club+ Backend Models (aligned with Prisma schema)
+export interface Platform {
+  id: string;
+  name: string;
+  logoUrl?: string;
+  description?: string;
+  isActive: boolean;
+  createdAt: string;
+}
+
+export interface ComboTemplate {
+  id: string;
+  name: string;
+  description?: string;
+  price?: number;
+  isActive: boolean;
+  createdAt: string;
+  platforms?: Platform[];
+}
+
 export interface ComboOption {
   id: string;
   name: string;
@@ -25,60 +41,84 @@ export interface ComboOption {
   platforms: Platform[];
   price: number;
   originalPrice: number;
-  savings: number;
+  savings: string;
   isPopular?: boolean;
 }
 
-export interface Platform {
+// User-related types
+export interface UserProfile {
   id: string;
-  name: string;
-  logo: string;
-  category: 'streaming' | 'design' | 'productivity' | 'education';
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: 'USER' | 'ADMIN';
+  isEmailVerified: boolean;
+  createdAt: string;
 }
 
-// Predefined Combos for MVP
+export interface UserCombo {
+  id: string;
+  userId: string;
+  comboTemplateId: string;
+  status: 'ACTIVE' | 'CANCELLED' | 'PAUSED';
+  createdAt: string;
+  comboTemplate: ComboTemplate;
+}
+
+// Assignment types
+export interface Assignment {
+  id: string;
+  userId: string;
+  profileId: string;
+  comboId: string;
+  assignedAt: string;
+  profile: Profile;
+}
+
+export interface Profile {
+  id: string;
+  accountId: string;
+  profileName: string;
+  avatarUrl?: string;
+  status: 'AVAILABLE' | 'ASSIGNED' | 'BLOCKED';
+  createdAt: string;
+}
+
+// API request types
+export interface CreateComboRequest {
+  comboTemplateId: string;
+}
+
+export interface UpdateProfileRequest {
+  firstName?: string;
+  lastName?: string;
+}
+
+// Predefined Combos for MVP (matching backend seed data)
 export type ComboType = 'entertainment' | 'creative' | 'complete';
 
-export const COMBOS: Record<ComboType, ComboOption> = {
+export const COMBO_PRESETS: Record<ComboType, Omit<ComboOption, 'id' | 'platforms'>> = {
   entertainment: {
-    id: 'entertainment',
-    name: 'Entretenimiento',
-    description: 'Lo mejor del streaming en un solo combo',
-    platforms: [
-      { id: 'disney', name: 'Disney+', logo: '/logos/disney.png', category: 'streaming' },
-      { id: 'hbo', name: 'HBO Max', logo: '/logos/hbo.png', category: 'streaming' },
-      { id: 'netflix', name: 'Netflix', logo: '/logos/netflix.png', category: 'streaming' },
-    ],
-    price: 25.99,
-    originalPrice: 45.97,
-    savings: 43,
+    name: 'Combo Entretenimiento',
+    description: 'Disney+ + HBO Max - Todo el entretenimiento que necesitas',
+    price: 199,
+    originalPrice: 398,
+    savings: '50%',
+    isPopular: true,
   },
   creative: {
-    id: 'creative',
-    name: 'Creativo',
-    description: 'Herramientas profesionales para crear',
-    platforms: [
-      { id: 'canva', name: 'Canva Pro', logo: '/logos/canva.png', category: 'design' },
-      { id: 'adobe', name: 'Adobe Creative', logo: '/logos/adobe.png', category: 'design' },
-      { id: 'figma', name: 'Figma', logo: '/logos/figma.png', category: 'design' },
-    ],
-    price: 35.99,
-    originalPrice: 65.97,
-    savings: 45,
+    name: 'Combo Creativo', 
+    description: 'Disney+ + Canva Pro - Entretenimiento y creatividad',
+    price: 249,
+    originalPrice: 448,
+    savings: '44%',
   },
   complete: {
-    id: 'complete',
-    name: 'Completo',
-    description: 'Todo lo que necesitas en un solo lugar',
-    platforms: [
-      { id: 'disney', name: 'Disney+', logo: '/logos/disney.png', category: 'streaming' },
-      { id: 'canva', name: 'Canva Pro', logo: '/logos/canva.png', category: 'design' },
-      { id: 'spotify', name: 'Spotify', logo: '/logos/spotify.png', category: 'streaming' },
-      { id: 'notion', name: 'Notion', logo: '/logos/notion.png', category: 'productivity' },
-    ],
-    price: 49.99,
-    originalPrice: 89.96,
-    savings: 44,
+    name: 'Combo Completo',
+    description: 'Disney+ + HBO Max + Canva Pro - La experiencia completa',
+    price: 299,
+    originalPrice: 597,
+    savings: '50%',
     isPopular: true,
   },
 };
