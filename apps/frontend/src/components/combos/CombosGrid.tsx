@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import { Palette, Play, Star } from 'lucide-react';
 import React from 'react';
-import Button from '../ui/Button';
 import { useComboTemplates, useCreateCombo } from '../../hooks/useApi';
 import { ComboTemplate } from '../../types/api';
+import Button from '../ui/Button';
 
 interface ComboCardProps {
   combo: ComboTemplate;
@@ -12,15 +12,36 @@ interface ComboCardProps {
 }
 
 const ComboCard: React.FC<ComboCardProps> = ({ combo, onSelect, isLoading = false }) => {
-  // Map combo names to icons
-  const getIcon = (name: string) => {
-    if (name.toLowerCase().includes('entretenimiento')) return Play;
-    if (name.toLowerCase().includes('creativo')) return Palette;
-    if (name.toLowerCase().includes('completo')) return Star;
-    return Star; // default
+  // Map platform names to local logo paths
+  const getPlatformLogo = (platformName: string) => {
+    const name = platformName.toLowerCase();
+    if (name.includes('disney')) return '/logos/disney-plus.svg';
+    if (name.includes('hbo')) return '/logos/hbo-max.svg';
+    if (name.includes('canva')) return '/logos/canva-pro.svg';
+    return null;
   };
 
-  const Icon = getIcon(combo.name);
+  // Get the first available platform logo or fallback to icon
+  const getPrimaryLogo = () => {
+    if (combo.platforms && combo.platforms.length > 0) {
+      for (const platform of combo.platforms) {
+        const logo = getPlatformLogo(platform.name);
+        if (logo) return { type: 'logo', src: logo, alt: platform.name };
+      }
+    }
+
+    // Fallback to icon
+    const getIcon = (name: string) => {
+      if (name.toLowerCase().includes('entretenimiento')) return Play;
+      if (name.toLowerCase().includes('creativo')) return Palette;
+      if (name.toLowerCase().includes('completo')) return Star;
+      return Star; // default
+    };
+
+    return { type: 'icon', component: getIcon(combo.name) };
+  };
+
+  const primaryDisplay = getPrimaryLogo();
 
   // Temporary price mapping until backend has prices
   const getPricing = (name: string) => {
@@ -46,12 +67,46 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, onSelect, isLoading = fals
       className='bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow'
     >
       <div className='bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6'>
-        <Icon size={32} className='text-primary' />
+        {primaryDisplay.type === 'logo' ? (
+          <img
+            src={primaryDisplay.src}
+            alt={primaryDisplay.alt}
+            className='w-10 h-10 object-contain'
+          />
+        ) : (
+          (() => {
+            const IconComponent = primaryDisplay.component;
+            return IconComponent ? <IconComponent size={32} className='text-primary' /> : null;
+          })()
+        )}
       </div>
-      <h3 className='text-xl font-semibold text-gray-900 mb-4 font-code'>
-        {combo.name}
-      </h3>
-      <p className='text-gray-600 mb-6'>{combo.description}</p>
+      <h3 className='text-xl font-semibold text-gray-900 mb-4 font-code'>{combo.name}</h3>
+      <p className='text-gray-600 mb-4'>{combo.description}</p>
+
+      {/* Platforms included */}
+      {combo.platforms && combo.platforms.length > 0 && (
+        <div className='mb-6'>
+          <p className='text-sm text-gray-500 mb-3'>Incluye:</p>
+          <div className='flex flex-wrap justify-center gap-3'>
+            {combo.platforms.map(platform => {
+              const logo = getPlatformLogo(platform.name);
+              return (
+                <div key={platform.id} className='flex flex-col items-center'>
+                  {logo ? (
+                    <img src={logo} alt={platform.name} className='w-8 h-8 object-contain mb-1' />
+                  ) : (
+                    <div className='w-8 h-8 bg-gray-200 rounded flex items-center justify-center mb-1'>
+                      <span className='text-xs text-gray-500'>{platform.name.charAt(0)}</span>
+                    </div>
+                  )}
+                  <span className='text-xs text-gray-600 text-center'>{platform.name}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div className='mb-6'>
         <div className='text-3xl font-bold text-primary mb-2'>{pricing.price}</div>
         <div className='text-sm text-gray-500'>
@@ -59,14 +114,16 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, onSelect, isLoading = fals
           <span className='ml-2 text-green-600 font-semibold'>Ahorras {pricing.savings}</span>
         </div>
       </div>
-      <Button 
-        className='w-full' 
-        onClick={() => onSelect?.(combo.id)}
-        isLoading={isLoading}
-        disabled={isLoading}
-      >
-        {isLoading ? 'Seleccionando...' : 'Seleccionar Plan'}
-      </Button>
+      {onSelect && (
+        <Button
+          className='w-full'
+          onClick={() => onSelect(combo.id)}
+          isLoading={isLoading}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Seleccionando...' : 'Seleccionar Plan'}
+        </Button>
+      )}
     </motion.div>
   );
 };
@@ -76,9 +133,9 @@ interface CombosGridProps {
   showSelectButton?: boolean;
 }
 
-export const CombosGrid: React.FC<CombosGridProps> = ({ 
-  onComboSelect, 
-  showSelectButton = true 
+export const CombosGrid: React.FC<CombosGridProps> = ({
+  onComboSelect,
+  showSelectButton = true,
 }) => {
   const { data: combos, isLoading, error } = useComboTemplates();
   const createComboMutation = useCreateCombo();
@@ -101,7 +158,7 @@ export const CombosGrid: React.FC<CombosGridProps> = ({
   if (isLoading) {
     return (
       <div className='grid md:grid-cols-3 gap-8'>
-        {[1, 2, 3].map((i) => (
+        {[1, 2, 3].map(i => (
           <div key={i} className='bg-gray-100 rounded-lg h-96 animate-pulse' />
         ))}
       </div>
@@ -127,7 +184,7 @@ export const CombosGrid: React.FC<CombosGridProps> = ({
 
   return (
     <div className='grid md:grid-cols-3 gap-8'>
-      {combos.map((combo) => (
+      {combos.map(combo => (
         <ComboCard
           key={combo.id}
           combo={combo}

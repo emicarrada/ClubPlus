@@ -53,7 +53,10 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       `}
       >
         <div className='flex items-center justify-between h-16 px-4 border-b border-gray-200'>
-          <h1 className='text-xl font-bold text-primary font-code'>Club+</h1>
+          <div className='flex items-center space-x-3'>
+            <img src='/logos/club-plus-logo.png' alt='Club+ Logo' className='h-8 w-auto' />
+            <h1 className='text-xl font-bold text-primary font-code'>Club+</h1>
+          </div>
           <button
             onClick={() => setIsSidebarOpen(false)}
             className='lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100'

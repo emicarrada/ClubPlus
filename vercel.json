@@ -6,7 +6,8 @@
       "src": "apps/frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "apps/frontend/dist"
+        "distDir": "apps/frontend/dist",
+        "framework": "vite"
       }
     }
   ],
@@ -44,6 +45,36 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(js|css|svg|png|jpg|jpeg|gif|ico|woff|woff2))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     }
@@ -58,6 +89,11 @@
     "env": {
       "VITE_API_URL": "https://clubplus-api.railway.app",
       "VITE_NODE_ENV": "production"
+    }
+  },
+  "functions": {
+    "apps/frontend/dist/**": {
+      "maxDuration": 10
     }
   }
 }

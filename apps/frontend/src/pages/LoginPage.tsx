@@ -162,7 +162,13 @@ const LoginPage: React.FC = () => {
           </div>
         </div>
 
-        <Button type='submit' variant='primary' size='lg' isLoading={loginMutation.isPending} className='w-full'>
+        <Button
+          type='submit'
+          variant='primary'
+          size='lg'
+          isLoading={loginMutation.isPending}
+          className='w-full'
+        >
           {loginMutation.isPending ? 'Iniciando sesión...' : 'Iniciar Sesión'}
         </Button>
       </form>

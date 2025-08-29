@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Palette, Play, Star } from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../components/ui/Button';
 import CombosGrid from '../components/combos/CombosGrid';
+import Button from '../components/ui/Button';
 
 const HomePage: React.FC = () => {
   const features = [
@@ -32,7 +32,8 @@ const HomePage: React.FC = () => {
       <header className='bg-white shadow-sm'>
         <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
           <div className='flex justify-between items-center py-6'>
-            <div className='flex items-center'>
+            <div className='flex items-center space-x-3'>
+              <img src='/logos/club-plus-logo.png' alt='Club+ Logo' className='h-10 w-auto' />
               <h1 className='text-2xl font-bold text-primary font-code'>Club+</h1>
             </div>
             <div className='flex items-center space-x-4'>

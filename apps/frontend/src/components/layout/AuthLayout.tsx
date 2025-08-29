@@ -9,8 +9,11 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
     <div className='min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
       <div className='sm:mx-auto sm:w-full sm:max-w-md'>
         <div className='text-center'>
+          <div className='flex justify-center mb-4'>
+            <img src='/logos/club-plus-logo.png' alt='Club+ Logo' className='h-16 w-auto' />
+          </div>
           <h1 className='text-3xl font-bold text-primary font-code'>Club+</h1>
-          <p className='mt-2 text-sm text-gray-600'>La plataforma definitiva para tu gimnasio</p>
+          <p className='mt-2 text-sm text-gray-600'>Suscripciones digitales compartidas</p>
         </div>
       </div>
 

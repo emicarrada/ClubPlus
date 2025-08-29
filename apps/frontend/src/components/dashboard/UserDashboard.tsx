@@ -1,7 +1,7 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Clock, X, User, Settings } from 'lucide-react';
-import { useCurrentUser, useUserCombos, useUserAssignments } from '../../hooks/useApi';
+import { Check, Clock, Settings, User, X } from 'lucide-react';
+import React from 'react';
+import { useCurrentUser, useUserAssignments, useUserCombos } from '../../hooks/useApi';
 import Button from '../ui/Button';
 
 export const UserDashboard: React.FC = () => {
@@ -16,7 +16,7 @@ export const UserDashboard: React.FC = () => {
       <div className='min-h-screen bg-gray-50 p-6'>
         <div className='max-w-7xl mx-auto'>
           <div className='grid gap-6'>
-            {[1, 2, 3].map((i) => (
+            {[1, 2, 3].map(i => (
               <div key={i} className='bg-white rounded-lg p-6 shadow-sm animate-pulse'>
                 <div className='h-6 bg-gray-200 rounded w-1/4 mb-4'></div>
                 <div className='h-4 bg-gray-200 rounded w-3/4'></div>
@@ -38,9 +38,7 @@ export const UserDashboard: React.FC = () => {
               <h1 className='text-3xl font-bold text-gray-900 font-code'>
                 ¡Hola, {user?.name || 'Usuario'}! 👋
               </h1>
-              <p className='text-gray-600 mt-1'>
-                Bienvenido a tu dashboard de Club+
-              </p>
+              <p className='text-gray-600 mt-1'>Bienvenido a tu dashboard de Club+</p>
             </div>
             <div className='flex items-center space-x-4'>
               <Button variant='secondary' size='sm'>
@@ -86,9 +84,7 @@ export const UserDashboard: React.FC = () => {
               </div>
               <div className='ml-4'>
                 <p className='text-sm font-medium text-gray-600'>Perfiles Asignados</p>
-                <p className='text-2xl font-bold text-gray-900'>
-                  {assignments?.length || 0}
-                </p>
+                <p className='text-2xl font-bold text-gray-900'>{assignments?.length || 0}</p>
               </div>
             </div>
           </motion.div>
@@ -120,25 +116,19 @@ export const UserDashboard: React.FC = () => {
             className='bg-white rounded-lg shadow-sm'
           >
             <div className='p-6 border-b border-gray-200'>
-              <h2 className='text-lg font-semibold text-gray-900 font-code'>
-                Mis Combos
-              </h2>
+              <h2 className='text-lg font-semibold text-gray-900 font-code'>Mis Combos</h2>
             </div>
             <div className='p-6'>
               {combos && combos.length > 0 ? (
                 <div className='space-y-4'>
-                  {combos.map((combo) => (
+                  {combos.map(combo => (
                     <div
                       key={combo.id}
                       className='flex items-center justify-between p-4 border border-gray-200 rounded-lg'
                     >
                       <div>
-                        <h3 className='font-medium text-gray-900'>
-                          {combo.comboTemplate.name}
-                        </h3>
-                        <p className='text-sm text-gray-600'>
-                          {combo.comboTemplate.description}
-                        </p>
+                        <h3 className='font-medium text-gray-900'>{combo.comboTemplate.name}</h3>
+                        <p className='text-sm text-gray-600'>{combo.comboTemplate.description}</p>
                       </div>
                       <div className='flex items-center space-x-2'>
                         <span
@@ -146,12 +136,15 @@ export const UserDashboard: React.FC = () => {
                             combo.status === 'ACTIVE'
                               ? 'bg-green-100 text-green-800'
                               : combo.status === 'PAUSED'
-                              ? 'bg-yellow-100 text-yellow-800'
-                              : 'bg-red-100 text-red-800'
+                                ? 'bg-yellow-100 text-yellow-800'
+                                : 'bg-red-100 text-red-800'
                           }`}
                         >
-                          {combo.status === 'ACTIVE' ? 'Activo' : 
-                           combo.status === 'PAUSED' ? 'Pausado' : 'Cancelado'}
+                          {combo.status === 'ACTIVE'
+                            ? 'Activo'
+                            : combo.status === 'PAUSED'
+                              ? 'Pausado'
+                              : 'Cancelado'}
                         </span>
                       </div>
                     </div>
@@ -175,14 +168,12 @@ export const UserDashboard: React.FC = () => {
             className='bg-white rounded-lg shadow-sm'
           >
             <div className='p-6 border-b border-gray-200'>
-              <h2 className='text-lg font-semibold text-gray-900 font-code'>
-                Mis Perfiles
-              </h2>
+              <h2 className='text-lg font-semibold text-gray-900 font-code'>Mis Perfiles</h2>
             </div>
             <div className='p-6'>
               {assignments && assignments.length > 0 ? (
                 <div className='space-y-4'>
-                  {assignments.map((assignment) => (
+                  {assignments.map(assignment => (
                     <div
                       key={assignment.id}
                       className='flex items-center justify-between p-4 border border-gray-200 rounded-lg'

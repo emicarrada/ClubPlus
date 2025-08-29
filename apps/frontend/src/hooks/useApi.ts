@@ -1,29 +1,29 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '../lib/api';
 import { authService } from '../lib/auth';
-import { 
-  ApiResponse, 
-  ComboTemplate, 
-  Platform, 
-  UserCombo, 
+import {
+  ApiResponse,
+  Assignment,
+  ComboTemplate,
   CreateComboRequest,
-  Assignment
+  Platform,
+  UserCombo,
 } from '../types/api';
 
 // Query Keys - Centralized for consistency
 export const queryKeys = {
   // Auth-related
   currentUser: ['currentUser'] as const,
-  
+
   // Platforms
   platforms: ['platforms'] as const,
   platform: (id: string) => ['platform', id] as const,
-  
+
   // Combos
   comboTemplates: ['comboTemplates'] as const,
   comboTemplate: (id: string) => ['comboTemplate', id] as const,
   userCombos: ['userCombos'] as const,
-  
+
   // Assignments
   userAssignments: ['userAssignments'] as const,
 };
@@ -43,14 +43,14 @@ export const useCurrentUser = () => {
 
 export const useUpdateProfile = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: (data: { name?: string; [key: string]: any }) => authService.updateProfile(data),
-    onSuccess: (updatedUser) => {
+    onSuccess: updatedUser => {
       // Update the current user cache
       queryClient.setQueryData(queryKeys.currentUser, updatedUser);
     },
-    onError: (error) => {
+    onError: error => {
       console.error('Failed to update profile:', error);
     },
   });
@@ -58,9 +58,14 @@ export const useUpdateProfile = () => {
 
 export const useChangePassword = () => {
   return useMutation({
-    mutationFn: ({ currentPassword, newPassword }: { currentPassword: string; newPassword: string }) =>
-      authService.changePassword(currentPassword, newPassword),
-    onError: (error) => {
+    mutationFn: ({
+      currentPassword,
+      newPassword,
+    }: {
+      currentPassword: string;
+      newPassword: string;
+    }) => authService.changePassword(currentPassword, newPassword),
+    onError: error => {
       console.error('Failed to change password:', error);
     },
   });
@@ -135,7 +140,7 @@ export const useUserCombos = () => {
 
 export const useCreateCombo = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async (data: CreateComboRequest): Promise<UserCombo> => {
       const response = await apiClient.post<ApiResponse<UserCombo>>('/combos', data);
@@ -146,7 +151,7 @@ export const useCreateCombo = () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.userCombos });
       queryClient.invalidateQueries({ queryKey: queryKeys.userAssignments });
     },
-    onError: (error) => {
+    onError: error => {
       console.error('Failed to create combo:', error);
     },
   });
@@ -154,7 +159,7 @@ export const useCreateCombo = () => {
 
 export const useCancelCombo = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async (comboId: string): Promise<UserCombo> => {
       const response = await apiClient.patch<ApiResponse<UserCombo>>(`/combos/${comboId}/cancel`);
@@ -165,7 +170,7 @@ export const useCancelCombo = () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.userCombos });
       queryClient.invalidateQueries({ queryKey: queryKeys.userAssignments });
     },
-    onError: (error) => {
+    onError: error => {
       console.error('Failed to cancel combo:', error);
     },
   });
@@ -179,7 +184,9 @@ export const useUserAssignments = () => {
   return useQuery({
     queryKey: queryKeys.userAssignments,
     queryFn: async (): Promise<Assignment[]> => {
-      const response = await apiClient.get<ApiResponse<Assignment[]>>('/assignments/my-assignments');
+      const response = await apiClient.get<ApiResponse<Assignment[]>>(
+        '/assignments/my-assignments',
+      );
       return response.data.data;
     },
     enabled: authService.isAuthenticated(),
@@ -192,18 +199,18 @@ export const useUserAssignments = () => {
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: ({ email, password }: { email: string; password: string }) =>
       authService.login(email, password),
-    onSuccess: (data) => {
+    onSuccess: data => {
       // Store tokens
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);
-      
+
       // Set user data in cache
       queryClient.setQueryData(queryKeys.currentUser, data.user);
-      
+
       // Prefetch user data
       queryClient.prefetchQuery({
         queryKey: queryKeys.userCombos,
@@ -213,7 +220,7 @@ export const useLogin = () => {
         },
       });
     },
-    onError: (error) => {
+    onError: error => {
       console.error('Login failed:', error);
     },
   });
@@ -221,19 +228,19 @@ export const useLogin = () => {
 
 export const useRegister = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: ({ email, password, name }: { email: string; password: string; name: string }) =>
       authService.register(email, password, name),
-    onSuccess: (data) => {
+    onSuccess: data => {
       // Store tokens
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('refreshToken', data.refreshToken);
-      
+
       // Set user data in cache
       queryClient.setQueryData(queryKeys.currentUser, data.user);
     },
-    onError: (error) => {
+    onError: error => {
       console.error('Registration failed:', error);
     },
   });
@@ -241,16 +248,16 @@ export const useRegister = () => {
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: () => authService.logout(),
     onSettled: () => {
       // Clear all auth data
       authService.clearAuthData();
-      
+
       // Clear all cached data
       queryClient.clear();
-      
+
       // Redirect to login
       window.location.href = '/login';
     },

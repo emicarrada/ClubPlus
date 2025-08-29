@@ -107,7 +107,7 @@ export const COMBO_PRESETS: Record<ComboType, Omit<ComboOption, 'id' | 'platform
     isPopular: true,
   },
   creative: {
-    name: 'Combo Creativo', 
+    name: 'Combo Creativo',
     description: 'Disney+ + Canva Pro - Entretenimiento y creatividad',
     price: 249,
     originalPrice: 448,
