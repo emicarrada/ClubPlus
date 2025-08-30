@@ -38,15 +38,30 @@ vi.mock('../hooks/useApi', () => ({
     isLoading: false,
     error: null,
   })),
-}));
-
-vi.mock('../components/combos/CombosGrid', () => ({
-  default: ({ showSelectButton }: { showSelectButton?: boolean }) =>
-    React.createElement(
-      'div',
-      { 'data-testid': 'combos-grid' },
-      `Mock CombosGrid - showSelectButton: ${showSelectButton?.toString()}`,
-    ),
+  useLogin: vi.fn(() => ({
+    mutate: vi.fn(),
+    mutateAsync: vi.fn(),
+    isLoading: false,
+    error: null,
+    isSuccess: false,
+    isError: false,
+  })),
+  useRegister: vi.fn(() => ({
+    mutate: vi.fn(),
+    mutateAsync: vi.fn(),
+    isLoading: false,
+    error: null,
+    isSuccess: false,
+    isError: false,
+  })),
+  useCreateCombo: vi.fn(() => ({
+    mutate: vi.fn(),
+    mutateAsync: vi.fn(),
+    isLoading: false,
+    error: null,
+    isSuccess: false,
+    isError: false,
+  })),
 }));
 
 // Mock IntersectionObserver
