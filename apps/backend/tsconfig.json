@@ -2,13 +2,12 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "CommonJS",
-    "moduleResolution": "Node",
     "outDir": "./dist",
     "rootDir": "./src",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    
+
     // Strict TypeScript configuration
     "strict": true,
     "noImplicitAny": true,
@@ -19,13 +18,13 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": false,
     "noUncheckedIndexedAccess": false,
-    
+
     // Module and resolution
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "allowJs": false,
     "checkJs": false,
-    
+
     // Output directory configuration
     "declaration": true,
     "declarationMap": true,
@@ -34,13 +33,13 @@
     "noEmitOnError": true,
     "incremental": true,
     "tsBuildInfoFile": "./dist/.tsbuildinfo",
-    
+
     // Type definitions
     "types": ["node", "jest"],
     "lib": ["ES2022"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    
+
     // Path mapping para imports
     "baseUrl": "./src",
     "paths": {
@@ -52,13 +51,6 @@
       "@/types/*": ["types/*"]
     }
   },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.test.ts",
-    "**/*.spec.ts"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }

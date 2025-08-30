@@ -27,9 +27,7 @@ vi.mock('../../hooks/useApi', () => ({
         price: 299,
         isActive: true,
         createdAt: '2024-01-01T00:00:00Z',
-        platforms: [
-          { id: 'canva-pro', name: 'Canva Pro', logoUrl: '/logos/canva-pro.svg' },
-        ],
+        platforms: [{ id: 'canva-pro', name: 'Canva Pro', logoUrl: '/logos/canva-pro.svg' }],
       },
     ],
     isLoading: false,
