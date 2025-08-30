@@ -7,7 +7,7 @@ import Button from '../ui/Button';
 
 interface ComboCardProps {
   combo: ComboTemplate;
-  onSelect?: (comboId: string) => void;
+  onSelect?: (_comboId: string) => void;
   isLoading?: boolean;
 }
 
@@ -129,7 +129,7 @@ const ComboCard: React.FC<ComboCardProps> = ({ combo, onSelect, isLoading = fals
 };
 
 interface CombosGridProps {
-  onComboSelect?: (comboId: string) => void;
+  onComboSelect?: (_comboId: string) => void;
   showSelectButton?: boolean;
 }
 

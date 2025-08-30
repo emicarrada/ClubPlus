@@ -1,10 +1,10 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { authService } from '../lib/auth';
 import { AuthState } from '../types/auth';
 
 interface AuthContextType extends AuthState {
-  login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, name: string) => Promise<void>;
+  login: (_email: string, _password: string) => Promise<void>;
+  register: (_email: string, _password: string, _name: string) => Promise<void>;
   logout: () => Promise<void>;
   refreshAuth: () => Promise<void>;
 }

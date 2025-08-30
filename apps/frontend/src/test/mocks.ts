@@ -1,3 +1,4 @@
+import React from 'react';
 import { vi } from 'vitest';
 import { ComboTemplate, Platform } from '../types/api';
 import { AuthResponse, User } from '../types/auth';
